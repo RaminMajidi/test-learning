@@ -39,6 +39,7 @@ body {
     width: 55%;
     opacity: .8;
     background: -moz-linear-gradient(135deg, rgb(49, 59, 54), rgb(40, 90, 86));
+    background: -webkit-linear-gradient(135deg, rgb(49, 59, 54), rgb(40, 90, 86));
 }
 
 .input-container {
