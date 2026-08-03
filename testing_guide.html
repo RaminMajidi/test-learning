@@ -1248,33 +1248,163 @@ it(<span class="st">'should add item to cart when button is clicked'</span>, <sp
   expect(useCartStore.getState().items).toContain(<span class="st">'کفش'</span>)
 })</code></pre>
 
-  <h3 class="sub-title">با <span dir="ltr" style="unicode-bidi:isolate">Redux Toolkit</span> (نیاز به <span dir="ltr" style="unicode-bidi:isolate">Provider</span> دارد)</h3>
-<pre><code><span class="kw">import</span> { Provider } <span class="kw">from</span> <span class="st">'react-redux'</span>
-<span class="kw">import</span> { configureStore } <span class="kw">from</span> <span class="st">'@reduxjs/toolkit'</span>
-<span class="kw">import</span> cartReducer <span class="kw">from</span> <span class="st">'../store/cartSlice'</span>
+  <h3 class="sub-title">با <span dir="ltr" style="unicode-bidi:isolate">Redux Toolkit</span> (نیاز به <span dir="ltr" style="unicode-bidi:isolate">Provider</span> دارد) — مثال کامل</h3>
 
-<span class="kw">function</span> <span class="fn">renderWithStore</span>(ui: React.ReactElement, preloadedState = {}) {
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۱. تعریف Slice — src/store/cartSlice.ts</h4>
+<pre><code><span class="kw">import</span> { createSlice, PayloadAction } <span class="kw">from</span> <span class="st">"@reduxjs/toolkit"</span>;
+
+<span class="kw">type</span> CartState = {
+  items: string[];
+};
+
+<span class="kw">const</span> initialState: CartState = {
+  items: [],
+};
+
+<span class="kw">const</span> cartSlice = createSlice({
+  name: <span class="st">"cart"</span>,
+  initialState,
+  reducers: {
+    addItem: (state, action: PayloadAction&lt;string&gt;) => {
+      state.items.push(action.payload);
+    },
+    removeItem: (state, action: PayloadAction&lt;string&gt;) => {
+      state.items = state.items.filter((item) => item !== action.payload);
+    },
+    clearCart: (state) => {
+      state.items = [];
+    },
+  },
+});
+
+<span class="kw">export const</span> { addItem, removeItem, clearCart } = cartSlice.actions;
+<span class="kw">export default</span> cartSlice.reducer;</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۲. کامپوننت نمایش تعداد — src/components/CartSummary.tsx</h4>
+<pre><code><span class="kw">import</span> { useSelector } <span class="kw">from</span> <span class="st">"react-redux"</span>;
+<span class="kw">import type</span> { RootState } <span class="kw">from</span> <span class="st">"../store/store"</span>;
+
+<span class="kw">export function</span> <span class="fn">CartSummary</span>() {
+  <span class="kw">const</span> items = useSelector((state: RootState) => state.cart.items);
+
+  <span class="kw">return</span> &lt;p&gt;{items.length} کالا در سبد&lt;/p&gt;;
+}</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۳. کامپوننت افزودن به سبد — src/components/AddToCartButton.tsx</h4>
+<pre><code><span class="kw">import</span> { useDispatch } <span class="kw">from</span> <span class="st">"react-redux"</span>;
+<span class="kw">import</span> { addItem } <span class="kw">from</span> <span class="st">"../store/cartSlice"</span>;
+
+<span class="kw">type</span> AddToCartButtonProps = {
+  productName: string;
+};
+
+<span class="kw">export function</span> <span class="fn">AddToCartButton</span>({ productName }: AddToCartButtonProps) {
+  <span class="kw">const</span> dispatch = useDispatch();
+
+  <span class="kw">return</span> (
+    &lt;button onClick={() =&gt; dispatch(addItem(productName))}&gt;
+      افزودن {productName} به سبد
+    &lt;/button&gt;
+  );
+}</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۴. تعریف RootState — src/store/store.ts</h4>
+<pre><code><span class="kw">import</span> { configureStore } <span class="kw">from</span> <span class="st">"@reduxjs/toolkit"</span>;
+<span class="kw">import</span> cartReducer <span class="kw">from</span> <span class="st">"./cartSlice"</span>;
+
+<span class="kw">export const</span> store = configureStore({
+  reducer: { cart: cartReducer },
+});
+
+<span class="kw">export type</span> RootState = ReturnType&lt;typeof store.getState&gt;;
+<span class="kw">export type</span> AppDispatch = typeof store.dispatch;</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۵. تست کامل — src/components/CartSummary.test.tsx</h4>
+<pre><code><span class="kw">import</span> { describe, it, expect } <span class="kw">from</span> <span class="st">"vitest"</span>;
+<span class="kw">import</span> { render, screen } <span class="kw">from</span> <span class="st">"@testing-library/react"</span>;
+<span class="kw">import</span> userEvent <span class="kw">from</span> <span class="st">"@testing-library/user-event"</span>;
+<span class="kw">import</span> { Provider } <span class="kw">from</span> <span class="st">"react-redux"</span>;
+<span class="kw">import</span> { configureStore } <span class="kw">from</span> <span class="st">"@reduxjs/toolkit"</span>;
+<span class="kw">import</span> cartReducer <span class="kw">from</span> <span class="st">"../store/cartSlice"</span>;
+<span class="kw">import</span> { CartSummary } <span class="kw">from</span> <span class="st">"./CartSummary"</span>;
+<span class="kw">import</span> { AddToCartButton } <span class="kw">from</span> <span class="st">"./AddToCartButton"</span>;
+
+<span class="kw">function</span> <span class="fn">renderWithStore</span>(
+  ui: React.ReactElement,
+  preloadedState: { cart?: { items: string[] } } = {},
+) {
   <span class="kw">const</span> store = configureStore({
     reducer: { cart: cartReducer },
     preloadedState,
-  })
-  <span class="kw">return</span> render(&lt;Provider store={store}&gt;{ui}&lt;/Provider&gt;)
+  });
+
+  <span class="kw">return</span> {
+    ...render(&lt;Provider store={store}&gt;{ui}&lt;/Provider&gt;),
+    store, <span class="cm">// برگرداندن store برای بررسی مستقیم state در صورت نیاز</span>
+  };
 }
 
-it(<span class="st">'should display the number of items in cart'</span>, () => {
-  renderWithStore(&lt;CartSummary /&gt;, {
-    cart: { items: [<span class="st">'کفش'</span>, <span class="st">'کیف'</span>] },
-  })
+describe(<span class="st">"CartSummary component"</span>, () => {
+  it(<span class="st">"should show zero items when cart is empty"</span>, () => {
+    renderWithStore(&lt;CartSummary /&gt;);
 
-  expect(screen.getByText(<span class="st">'۲ کالا'</span>)).toBeInTheDocument()
-})</code></pre>
+    expect(screen.getByText(<span class="st">"0 کالا در سبد"</span>)).toBeInTheDocument();
+  });
+
+  it(<span class="st">"should show preloaded items count"</span>, () => {
+    renderWithStore(&lt;CartSummary /&gt;, {
+      cart: { items: [<span class="st">"کفش"</span>, <span class="st">"کیف"</span>] },
+    });
+
+    expect(screen.getByText(<span class="st">"2 کالا در سبد"</span>)).toBeInTheDocument();
+  });
+});
+
+describe(<span class="st">"AddToCartButton + CartSummary integration"</span>, () => {
+  it(<span class="st">"should update cart summary when item is added"</span>, <span class="kw">async</span> () => {
+    <span class="kw">const</span> user = userEvent.setup();
+
+    renderWithStore(
+      &lt;&gt;
+        &lt;AddToCartButton productName=<span class="st">"کفش"</span> /&gt;
+        &lt;CartSummary /&gt;
+      &lt;/&gt;,
+    );
+
+    expect(screen.getByText(<span class="st">"0 کالا در سبد"</span>)).toBeInTheDocument();
+
+    <span class="kw">await</span> user.click(
+      screen.getByRole(<span class="st">"button"</span>, { name: <span class="st">"افزودن کفش به سبد"</span> }),
+    );
+
+    expect(screen.getByText(<span class="st">"1 کالا در سبد"</span>)).toBeInTheDocument();
+  });
+});</code></pre>
 
   <div class="box box-info">
-    <span class="box-title">تفاوت کلیدی</span>
+    <span class="box-title">۱. چرا <code>store</code> را هم از <span dir="ltr" style="unicode-bidi:isolate">renderWithStore</span> برمی‌گردانیم؟</span>
     <p>
-      با <code><span dir="ltr" style="unicode-bidi:isolate">preloadedState</span></code>، هر تست یک <span dir="ltr" style="unicode-bidi:isolate">store</span> تازه و ایزوله
-      با <span dir="ltr" style="unicode-bidi:isolate">state</span> دلخواه می‌سازد — نیازی به ریست دستی نیست، برخلاف <span dir="ltr" style="unicode-bidi:isolate">Zustand</span> که
-      <span dir="ltr" style="unicode-bidi:isolate">store</span> سراسری است.
+      گاهی می‌خواهید مستقیم <span dir="ltr" style="unicode-bidi:isolate">state</span> را چک کنید بدون وابستگی به UI:
+      <code>expect(store.getState().cart.items).toContain('کفش')</code>. این برای وقتی است که تست کردن از طریق UI
+      سخت یا غیرممکن است.
+    </p>
+  </div>
+
+  <div class="box box-info">
+    <span class="box-title">۲. چرا تست سوم (integration) هم <span dir="ltr" style="unicode-bidi:isolate">AddToCartButton</span> و هم <span dir="ltr" style="unicode-bidi:isolate">CartSummary</span> را با هم رندر می‌کند؟</span>
+    <p>
+      چون می‌خواهیم مطمئن شویم این دو کامپوننت <b>مستقل از هم، از طریق store</b> با هم در ارتباط‌اند — دقیقاً
+      همان الگوی <span dir="ltr" style="unicode-bidi:isolate">integration test</span> که در بخش ۲۱ هم دیدیم: تست ارتباط واقعی، نه فرض کردنش.
+    </p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۳. چرا هر تست یک <span dir="ltr" style="unicode-bidi:isolate">store</span> جدید می‌سازد؟</span>
+    <p>
+      برخلاف <span dir="ltr" style="unicode-bidi:isolate">Zustand</span> که یک <span dir="ltr" style="unicode-bidi:isolate">store</span> سراسری (<span dir="ltr" style="unicode-bidi:isolate">singleton</span>) بود
+      و نیاز به ریست دستی در <code>beforeEach</code> داشت، اینجا هر تست با صدا زدن <code>configureStore</code>
+      یک نمونه‌ی کاملاً مستقل و ایزوله می‌سازد — پس تست‌ها هرگز روی state یکدیگر اثر نمی‌گذارند و نیازی
+      به ریست دستی نیست.
     </p>
   </div>
 </section>
