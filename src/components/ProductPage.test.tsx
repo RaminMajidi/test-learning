@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { ProductPage } from "./ProductPage";
 import { expect, it } from "vitest";
-import { CheckoutPage } from "./checkoutPage";
+import { CheckoutPage } from "./CheckoutPage";
 import userEvent from "@testing-library/user-event";
 
 function renderWithRouter(initialPath: string) {
