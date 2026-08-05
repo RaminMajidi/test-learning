@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    margin: 22mm 18mm 22mm 18mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'FreeSans', sans-serif;
+    direction: rtl;
+    text-align: right;
+    font-size: 12.5px;
+    line-height: 1.9;
+    color: #232323;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'FreeSans', sans-serif;
+    font-weight: bold;
+    color: #1a2b4a;
+  }
+
+  /* ---------- Cover page ---------- */
+  .cover {
+    height: 250mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    page-break-after: always;
+  }
+  .cover .badge {
+    background: #2f5aa8;
+    color: white;
+    display: inline-block;
+    padding: 6px 22px;
+    border-radius: 30px;
+    font-size: 13px;
+    margin-bottom: 26px;
+    letter-spacing: 1px;
+  }
+  .cover h1 {
+    font-size: 34px;
+    margin: 0 0 14px 0;
+    color: #16233d;
+  }
+  .cover .subtitle {
+    font-size: 16px;
+    color: #55606e;
+    margin-bottom: 40px;
+    max-width: 480px;
+  }
+  .cover .stack {
+    font-size: 13px;
+    color: #2f5aa8;
+    font-family: 'DejaVu Sans Mono', monospace;
+    direction: ltr;
+    letter-spacing: 1px;
+  }
+  .cover .footer-note {
+    position: absolute;
+    bottom: 26mm;
+    font-size: 11px;
+    color: #97a1ad;
+  }
+
+  /* ---------- Sections ---------- */
+  section {
+    margin-bottom: 8px;
+  }
+  .section-break {
+    page-break-before: always;
+  }
+
+  h2.section-title {
+    font-size: 21px;
+    border-right: 6px solid #2f5aa8;
+    padding: 6px 14px;
+    background: #f2f5fa;
+    margin-top: 4px;
+    margin-bottom: 18px;
+    border-radius: 4px;
+  }
+
+  h3.sub-title {
+    font-size: 16px;
+    color: #2f5aa8;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #e3e8f0;
+    padding-bottom: 6px;
+  }
+
+  p { margin: 8px 0; }
+
+  /* ---------- Callout boxes ---------- */
+  .box {
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 12px;
+  }
+  .box-info {
+    background: #eef4fc;
+    border-right: 5px solid #2f5aa8;
+  }
+  .box-warning {
+    background: #fdf3e7;
+    border-right: 5px solid #d98324;
+  }
+  .box-rule {
+    background: #eefbf1;
+    border-right: 5px solid #2f9e5c;
+  }
+  .box-bad {
+    background: #fdeceb;
+    border-right: 5px solid #d9483f;
+  }
+  .box p { margin: 4px 0; }
+  .box-title {
+    font-weight: bold;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  /* ---------- Code ---------- */
+  pre {
+    direction: ltr;
+    text-align: left;
+    background: #1e2430;
+    color: #e6e9ef;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 10.5px;
+    line-height: 1.55;
+    overflow-x: auto;
+    margin: 10px 0 16px 0;
+    unicode-bidi: embed;
+  }
+  code {
+    font-family: 'DejaVu Sans Mono', monospace;
+    unicode-bidi: isolate;
+  }
+  p code, li code, td code {
+    background: #eef1f6;
+    color: #b8003e;
+    padding: 1px 5px;
+    border-radius: 3px;
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
+    font-size: 11px;
+  }
+  .cm { color: #8a95a5; }      /* comment */
+  .kw { color: #7fb0ff; }      /* keyword */
+  .fn { color: #ffcb6b; }      /* function name */
+  .st { color: #a6e3a1; }      /* string */
+
+  /* ---------- Tables ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 18px 0;
+    font-size: 11.5px;
+  }
+  th, td {
+    border: 1px solid #dde3ec;
+    padding: 7px 10px;
+    text-align: right;
+  }
+  th {
+    background: #2f5aa8;
+    color: white;
+    font-weight: bold;
+  }
+  tr:nth-child(even) td {
+    background: #f7f9fc;
+  }
+  td code, th code { direction: ltr; display: inline-block; }
+
+  ul, ol { margin: 8px 0; padding-right: 22px; }
+  li { margin: 5px 0; }
+
+  .pyramid {
+    width: 100%;
+    margin: 18px 0;
+    text-align: center;
+  }
+  .pyr-row {
+    display: block;
+    margin: 3px auto;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .pyr-e2e { width: 40%; background: #d9483f; }
+  .pyr-int { width: 62%; background: #d98324; }
+  .pyr-unit { width: 86%; background: #2f9e5c; }
+
+  .checklist-item {
+    margin: 6px 0;
+    font-size: 12.5px;
+  }
+  .checklist-item .box-icon {
+    display: inline-block;
+    width: 16px;
+  }
+
+  .toc {
+    padding: 0;
+    margin: 0;
+  }
+  .toc li {
+    list-style: none;
+    margin: 10px 0;
+    font-size: 13px;
+  }
+  .toc .num {
+    color: #2f5aa8;
+    font-weight: bold;
+    margin-left: 8px;
+  }
+
+  footer.page-footer {
+    font-size: 10px;
+    color: #a3acb8;
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid #e3e8f0;
+    padding-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <span class="badge">راهنمای مرجع</span>
+  <h1>تست‌نویسی در <span dir="ltr" style="unicode-bidi:isolate">React</span></h1>
+  <div class="subtitle">
+    مفاهیم پایه، انواع تست، مثال‌های عملی و قوانین طلایی برای نوشتن تست‌های حرفه‌ای
+    با <span dir="ltr" style="unicode-bidi:isolate">React</span> + <span dir="ltr" style="unicode-bidi:isolate">TypeScript</span> + <span dir="ltr" style="unicode-bidi:isolate">Vite</span> + <span dir="ltr" style="unicode-bidi:isolate">Vitest</span>
+  </div>
+  <div class="stack"><span dir="ltr" style="unicode-bidi:isolate">React</span> &<span dir="ltr" style="unicode-bidi:isolate">nbsp</span>;•&<span dir="ltr" style="unicode-bidi:isolate">nbsp</span>; <span dir="ltr" style="unicode-bidi:isolate">TypeScript</span> &<span dir="ltr" style="unicode-bidi:isolate">nbsp</span>;•&<span dir="ltr" style="unicode-bidi:isolate">nbsp</span>; <span dir="ltr" style="unicode-bidi:isolate">Vite</span> &<span dir="ltr" style="unicode-bidi:isolate">nbsp</span>;•&<span dir="ltr" style="unicode-bidi:isolate">nbsp</span>; <span dir="ltr" style="unicode-bidi:isolate">Vitest</span> &<span dir="ltr" style="unicode-bidi:isolate">nbsp</span>;•&<span dir="ltr" style="unicode-bidi:isolate">nbsp</span>; <span dir="ltr" style="unicode-bidi:isolate">Testing Library</span></div>
+  <div class="footer-note">تهیه شده برای رامین — یک منبع مرجع شخصی</div>
+</div>
+
+<!-- ============ TOC ============ -->
+<section>
+  <h2 class="section-title">فهرست مطالب</h2>
+  <ul class="toc">
+    <li><span class="num">۱.</span> هدف تست‌نویسی چیست و چرا اهمیت دارد</li>
+    <li><span class="num">۲.</span> انواع تست‌نویسی (<span dir="ltr" style="unicode-bidi:isolate">Unit</span>، <span dir="ltr" style="unicode-bidi:isolate">Integration</span>، <span dir="ltr" style="unicode-bidi:isolate">E2E</span> و بیشتر)</li>
+    <li><span class="num">۳.</span> هرم تست (<span dir="ltr" style="unicode-bidi:isolate">Testing Pyramid)</span></li>
+    <li><span class="num">۴.</span> ابزارهای اصلی در اکوسیستم <span dir="ltr" style="unicode-bidi:isolate">React</span></li>
+    <li><span class="num">۵.</span> مثال عملی: تست یک تابع ساده (<span dir="ltr" style="unicode-bidi:isolate">Unit)</span></li>
+    <li><span class="num">۶.</span> مثال عملی: تست رندر کامپوننت <span dir="ltr" style="unicode-bidi:isolate">UI</span></li>
+    <li><span class="num">۷.</span> اولویت‌بندی <span dir="ltr" style="unicode-bidi:isolate">Query</span> ها در <span dir="ltr" style="unicode-bidi:isolate">Testing Library</span></li>
+    <li><span class="num">۸.</span> مثال عملی: تست فرم و تعامل کاربر</li>
+    <li><span class="num">۹.</span> مثال عملی: <span dir="ltr" style="unicode-bidi:isolate">Mock</span> کردن توابع با <span dir="ltr" style="unicode-bidi:isolate">vi.fn</span></li>
+    <li><span class="num">۱۰.</span> مثال عملی: تست <span dir="ltr" style="unicode-bidi:isolate">async</span> و درخواست‌های <span dir="ltr" style="unicode-bidi:isolate">API</span></li>
+    <li><span class="num">۱۱.</span> مثال عملی: تست کامپوننت با <span dir="ltr" style="unicode-bidi:isolate">Context/Provider</span></li>
+    <li><span class="num">۱۲.</span> مثال عملی: تست یک <span dir="ltr" style="unicode-bidi:isolate">Custom Hook</span></li>
+    <li><span class="num">۱۳.</span> قوانین طلایی تست‌نویسی</li>
+    <li><span class="num">۱۴.</span> چک‌لیست نهایی قبل از <span dir="ltr" style="unicode-bidi:isolate">commit</span></li>
+    <li><span class="num">۱۵.</span> <span dir="ltr" style="unicode-bidi:isolate">MSW</span> برای <span dir="ltr" style="unicode-bidi:isolate">mock</span> کردن <span dir="ltr" style="unicode-bidi:isolate">API</span></li>
+    <li><span class="num">۱۶.</span> <span dir="ltr" style="unicode-bidi:isolate">vi.mock</span> برای <span dir="ltr" style="unicode-bidi:isolate">mock</span> کردن یک <span dir="ltr" style="unicode-bidi:isolate">module</span></li>
+    <li><span class="num">۱۷.</span> کنترل زمان با <span dir="ltr" style="unicode-bidi:isolate">Fake Timers</span></li>
+    <li><span class="num">۱۸.</span> تست‌های پارامتری با <span dir="ltr" style="unicode-bidi:isolate">it.each</span></li>
+    <li><span class="num">۱۹.</span> تست کامپوننت با <span dir="ltr" style="unicode-bidi:isolate">React Router</span></li>
+    <li><span class="num">۲۰.</span> تست کامپوننت متصل به <span dir="ltr" style="unicode-bidi:isolate">Zustand/Redux</span></li>
+    <li><span class="num">۲۱.</span> مثال عملی: تست یک فلوی کامل (<span dir="ltr" style="unicode-bidi:isolate">Integration</span> واقعی)</li>
+    <li><span class="num">۲۲.</span> سازماندهی پروژه و فایل‌ها</li>
+  </ul>
+</section>
+
+<!-- ============ 1. WHY ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱. هدف تست‌نویسی چیست و چرا اهمیت دارد</h2>
+  <p>
+    تست‌نویسی یعنی نوشتن کدی که به‌صورت خودکار بررسی می‌کند آیا بخش دیگری از کد،
+    همان‌طور که انتظار داریم رفتار می‌کند یا نه. بدون تست، تنها راه اطمینان از درست کار کردن
+    برنامه، تست دستی در مرورگر است که هم زمان‌بر است و هم قابل اعتماد نیست.
+  </p>
+
+  <div class="box box-info">
+    <span class="box-title">چرا تست می‌نویسیم؟</span>
+    <p>• <b>جلوگیری از <span dir="ltr" style="unicode-bidi:isolate">Regression</span>:</b> مطمئن می‌شویم تغییرات جدید، چیزی که قبلاً درست کار می‌کرد را خراب نکرده.</p>
+    <p>• <b><span dir="ltr" style="unicode-bidi:isolate">Refactor</span> با اطمینان:</b> می‌توان ساختار کد را بازنویسی کرد بدون ترس از خراب شدن رفتار.</p>
+    <p>• <b>مستندسازی زنده:</b> تست‌ها نشان می‌دهند یک کامپوننت یا تابع دقیقاً باید چه رفتاری داشته باشد.</p>
+    <p>• <b>کشف باگ زودتر:</b> باگ‌ها قبل از رسیدن به کاربر واقعی و در همان مرحله توسعه پیدا می‌شوند.</p>
+    <p>• <b>اعتماد تیمی:</b> در تیم‌های بزرگ، تست‌ها تضمین می‌کنند کد یک نفر، کد نفر دیگر را خراب نمی‌کند.</p>
+  </div>
+</section>
+
+<!-- ============ 2. TYPES ============ -->
+<section class="section-break">
+  <h2 class="section-title">۲. انواع تست‌نویسی</h2>
+
+  <table>
+    <tr>
+      <th>نوع تست</th>
+      <th>چه چیزی را بررسی می‌کند</th>
+      <th>مثال در <span dir="ltr" style="unicode-bidi:isolate">React</span></th>
+      <th>سرعت اجرا</th>
+    </tr>
+    <tr>
+      <td><b><span dir="ltr" style="unicode-bidi:isolate">Unit Test</span></b></td>
+      <td>یک واحد کوچک و مجزا از کد (تابع، هوک، کامپوننت ساده)</td>
+      <td>تست تابع <code><span dir="ltr" style="unicode-bidi:isolate">sum()</span></code> یا یک کامپوننت <code><span dir="ltr" style="unicode-bidi:isolate">Button</span></code></td>
+      <td>خیلی سریع</td>
+    </tr>
+    <tr>
+      <td><b><span dir="ltr" style="unicode-bidi:isolate">Integration Test</span></b></td>
+      <td>چند واحد که با هم ترکیب شده‌اند و باید هماهنگ کار کنند</td>
+      <td>فرمی با چند <span dir="ltr" style="unicode-bidi:isolate">input</span> که با هم <span dir="ltr" style="unicode-bidi:isolate">submit</span> می‌شوند</td>
+      <td>سریع</td>
+    </tr>
+    <tr>
+      <td><b><span dir="ltr" style="unicode-bidi:isolate">End-to-End</span> (<span dir="ltr" style="unicode-bidi:isolate">E2E)</span></b></td>
+      <td>کل برنامه از دید یک کاربر واقعی، در مرورگر واقعی</td>
+      <td>باز کردن سایت، لاگین، خرید محصول (با <span dir="ltr" style="unicode-bidi:isolate">Playwright/Cypress)</span></td>
+      <td>کند</td>
+    </tr>
+    <tr>
+      <td><b><span dir="ltr" style="unicode-bidi:isolate">Snapshot Test</span></b></td>
+      <td>مقایسه خروجی رندر شده با یک نسخه ذخیره‌شده قبلی</td>
+      <td>تشخیص تغییرات ناخواسته در ساختار <span dir="ltr" style="unicode-bidi:isolate">UI</span></td>
+      <td>سریع</td>
+    </tr>
+    <tr>
+      <td><b><span dir="ltr" style="unicode-bidi:isolate">Static Type Check</span></b></td>
+      <td>بررسی صحت تایپ‌ها قبل از اجرای برنامه (نه دقیقاً تست، ولی مکمل آن)</td>
+      <td>خطاهای <span dir="ltr" style="unicode-bidi:isolate">TypeScript</span> در زمان کامپایل</td>
+      <td>آنی</td>
+    </tr>
+  </table>
+
+  <div class="box box-warning">
+    <span class="box-title">نکته</span>
+    <p>
+      در پروژه‌های <span dir="ltr" style="unicode-bidi:isolate">React</span> معمولی، بیشترین ارزش از <b><span dir="ltr" style="unicode-bidi:isolate">Unit</span></b> و <b><span dir="ltr" style="unicode-bidi:isolate">Integration</span></b> تست‌ها به‌دست می‌آید،
+      چون هم سریع اجرا می‌شوند و هم مستقیماً با ابزارهایی مثل <span dir="ltr" style="unicode-bidi:isolate">Vitest</span> و <span dir="ltr" style="unicode-bidi:isolate">Testing Library</span> نوشته می‌شوند.
+      <span dir="ltr" style="unicode-bidi:isolate">E2E</span> برای سناریوهای حیاتی و مسیرهای اصلی کاربر (مثل فرآیند خرید) نگه داشته می‌شود، چون نگهداری‌اش پرهزینه‌تر است.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 3. PYRAMID ============ -->
+<section class="section-break">
+  <h2 class="section-title">۳. هرم تست (<span dir="ltr" style="unicode-bidi:isolate">Testing Pyramid)</span></h2>
+  <p>
+    یک راهنمای کلی برای تصمیم‌گیری در مورد اینکه «چقدر» از هر نوع تست بنویسیم:
+  </p>
+
+  <div class="pyramid">
+    <div class="pyr-row pyr-e2e"><span dir="ltr" style="unicode-bidi:isolate">E2E</span> — تعداد کم، سناریوهای حیاتی</div>
+    <div class="pyr-row pyr-int"><span dir="ltr" style="unicode-bidi:isolate">Integration</span> — تعداد متوسط</div>
+    <div class="pyr-row pyr-unit"><span dir="ltr" style="unicode-bidi:isolate">Unit</span> — بیشترین تعداد، سریع و ارزان</div>
+  </div>
+
+  <p>
+    هرچه به سمت بالای هرم برویم، تست‌ها واقعی‌تر ولی کندتر و شکننده‌تر می‌شوند. هرچه به سمت پایین برویم،
+    تست‌ها سریع‌تر و ارزان‌تر ولی محدودتر در پوشش سناریوهای واقعی هستند. تعادل درست معمولاً یعنی
+    نوشتن تست‌های زیاد <span dir="ltr" style="unicode-bidi:isolate">Unit</span>، مقدار معقولی <span dir="ltr" style="unicode-bidi:isolate">Integration</span>، و تعداد کمی <span dir="ltr" style="unicode-bidi:isolate">E2E</span> روی مسیرهای حیاتی.
+  </p>
+</section>
+
+<!-- ============ 4. TOOLS ============ -->
+<section class="section-break">
+  <h2 class="section-title">۴. ابزارهای اصلی در اکوسیستم <span dir="ltr" style="unicode-bidi:isolate">React</span></h2>
+
+  <table>
+    <tr>
+      <th>ابزار</th>
+      <th>نقش</th>
+    </tr>
+    <tr>
+      <td><code><span dir="ltr" style="unicode-bidi:isolate">vitest</span></code></td>
+      <td>اجراکننده تست (<span dir="ltr" style="unicode-bidi:isolate">test runner)</span>، جایگزین سریع <span dir="ltr" style="unicode-bidi:isolate">Jest</span> که با <span dir="ltr" style="unicode-bidi:isolate">Vite</span> هماهنگ است</td>
+    </tr>
+    <tr>
+      <td><code>@<span dir="ltr" style="unicode-bidi:isolate">testing-library/react</span></code></td>
+      <td>رندر کردن کامپوننت‌های <span dir="ltr" style="unicode-bidi:isolate">React</span> در محیط تست و دسترسی به <span dir="ltr" style="unicode-bidi:isolate">DOM</span> آن‌ها</td>
+    </tr>
+    <tr>
+      <td><code>@<span dir="ltr" style="unicode-bidi:isolate">testing-library/user-event</span></code></td>
+      <td>شبیه‌سازی واقعی‌تر تعاملات کاربر (تایپ، کلیک، انتخاب)</td>
+    </tr>
+    <tr>
+      <td><code>@<span dir="ltr" style="unicode-bidi:isolate">testing-library/jest-dom</span></code></td>
+      <td><span dir="ltr" style="unicode-bidi:isolate">matcher</span> های اضافه مثل <code><span dir="ltr" style="unicode-bidi:isolate">toBeInTheDocument()</span></code>, <code><span dir="ltr" style="unicode-bidi:isolate">toHaveValue()</span></code></td>
+    </tr>
+    <tr>
+      <td><code><span dir="ltr" style="unicode-bidi:isolate">jsdom</span></code></td>
+      <td>شبیه‌سازی <span dir="ltr" style="unicode-bidi:isolate">DOM</span> مرورگر درون <span dir="ltr" style="unicode-bidi:isolate">Node.js</span> برای اجرای تست‌ها بدون مرورگر واقعی</td>
+    </tr>
+    <tr>
+      <td><code><span dir="ltr" style="unicode-bidi:isolate">msw</span></code> (<span dir="ltr" style="unicode-bidi:isolate">Mock Service Worker)</span></td>
+      <td>استاندارد صنعتی برای <span dir="ltr" style="unicode-bidi:isolate">mock</span> کردن درخواست‌های شبکه در سطح شبکه، نه دستی</td>
+    </tr>
+    <tr>
+      <td><code><span dir="ltr" style="unicode-bidi:isolate">Playwright</span></code> / <code><span dir="ltr" style="unicode-bidi:isolate">Cypress</span></code></td>
+      <td>اجرای تست‌های <span dir="ltr" style="unicode-bidi:isolate">E2E</span> در یک مرورگر واقعی</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ============ 5. UNIT EXAMPLE ============ -->
+<section class="section-break">
+  <h2 class="section-title">۵. مثال عملی: تست یک تابع ساده (<span dir="ltr" style="unicode-bidi:isolate">Unit)</span></h2>
+
+  <h3 class="sub-title">کد اصلی — <span dir="ltr" style="unicode-bidi:isolate">src/utils/math.ts</span></h3>
+<pre><code><span class="kw">export function</span> <span class="fn">sum</span>(a: number, b: number): number {
+  <span class="kw">return</span> a + b
+}
+
+<span class="kw">export function</span> <span class="fn">isEven</span>(num: number): boolean {
+  <span class="kw">return</span> num % 2 === 0
+}</code></pre>
+
+  <h3 class="sub-title">فایل تست — <span dir="ltr" style="unicode-bidi:isolate">src/utils/math.test.ts</span></h3>
+<pre><code><span class="kw">import</span> { describe, it, expect } <span class="kw">from</span> <span class="st">'vitest'</span>
+<span class="kw">import</span> { sum, isEven } <span class="kw">from</span> <span class="st">'./math'</span>
+
+describe(<span class="st">'math utils'</span>, () => {
+  it(<span class="st">'should add two numbers correctly'</span>, () => {
+    expect(sum(2, 3)).toBe(5)
+  })
+
+  it(<span class="st">'should return true for even numbers'</span>, () => {
+    expect(isEven(4)).toBe(true)
+  })
+})</code></pre>
+
+  <div class="box box-rule">
+    <span class="box-title">الگوی <span dir="ltr" style="unicode-bidi:isolate">AAA</span></span>
+    <p>هر تست خوب سه بخش دارد: <b><span dir="ltr" style="unicode-bidi:isolate">Arrange</span></b> (آماده‌سازی داده)، <b><span dir="ltr" style="unicode-bidi:isolate">Act</span></b> (اجرای عملیات)، <b><span dir="ltr" style="unicode-bidi:isolate">Assert</span></b> (بررسی نتیجه).</p>
+  </div>
+</section>
+
+<!-- ============ 6. COMPONENT RENDER EXAMPLE ============ -->
+<section class="section-break">
+  <h2 class="section-title">۶. مثال عملی: تست رندر کامپوننت <span dir="ltr" style="unicode-bidi:isolate">UI</span></h2>
+
+  <h3 class="sub-title">کامپوننت — <span dir="ltr" style="unicode-bidi:isolate">src/components/Greeting.tsx</span></h3>
+<pre><code><span class="kw">type</span> GreetingProps = { name: string }
+
+<span class="kw">export function</span> <span class="fn">Greeting</span>({ name }: GreetingProps) {
+  <span class="kw">return</span> (
+    &lt;div&gt;
+      &lt;h1&gt;سلام، {name}!&lt;/h1&gt;
+      &lt;p&gt;به اپلیکیشن ما خوش اومدی&lt;/p&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+
+  <h3 class="sub-title">تست — <span dir="ltr" style="unicode-bidi:isolate">src/components/Greeting.test.tsx</span></h3>
+<pre><code><span class="kw">import</span> { render, screen } <span class="kw">from</span> <span class="st">'@testing-library/react'</span>
+<span class="kw">import</span> { Greeting } <span class="kw">from</span> <span class="st">'./Greeting'</span>
+
+describe(<span class="st">'Greeting component'</span>, () => {
+  it(<span class="st">'should render the name passed as prop'</span>, () => {
+    render(&lt;Greeting name=<span class="st">"علی"</span> /&gt;)
+
+    expect(screen.getByText(<span class="st">'سلام، علی!'</span>)).toBeInTheDocument()
+  })
+})</code></pre>
+
+  <div class="box box-info">
+    <span class="box-title">فلسفه اصلی <span dir="ltr" style="unicode-bidi:isolate">Testing Library</span></span>
+    <p>
+      "<span dir="ltr" style="unicode-bidi:isolate">Test the way your users use your app</span>" — یعنی به جزئیات پیاده‌سازی داخلی
+      (<span dir="ltr" style="unicode-bidi:isolate">implementation details)</span> کاری نداشته باش، فقط چیزی را تست کن که کاربر واقعی می‌بیند و با آن تعامل دارد.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 7. QUERY PRIORITY ============ -->
+<section class="section-break">
+  <h2 class="section-title">۷. اولویت‌بندی <span dir="ltr" style="unicode-bidi:isolate">Query</span> ها در <span dir="ltr" style="unicode-bidi:isolate">Testing Library</span></h2>
+
+  <table>
+    <tr>
+      <th>اولویت</th>
+      <th><span dir="ltr" style="unicode-bidi:isolate">Query</span></th>
+      <th>چه زمانی استفاده شود</th>
+    </tr>
+    <tr>
+      <td>۱ (بهترین)</td>
+      <td><code><span dir="ltr" style="unicode-bidi:isolate">getByRole</span></code></td>
+      <td>دکمه، هدینگ، لینک، فیلد ورودی — همان چیزی که <span dir="ltr" style="unicode-bidi:isolate">screen reader</span> می‌بیند</td>
+    </tr>
+    <tr>
+      <td>۲</td>
+      <td><code><span dir="ltr" style="unicode-bidi:isolate">getByLabelText</span></code></td>
+      <td>فیلدهای فرم که <span dir="ltr" style="unicode-bidi:isolate">label</span> دارند</td>
+    </tr>
+    <tr>
+      <td>۳</td>
+      <td><code><span dir="ltr" style="unicode-bidi:isolate">getByPlaceholderText</span></code> / <code><span dir="ltr" style="unicode-bidi:isolate">getByText</span></code></td>
+      <td>وقتی گزینه بهتری در دسترس نیست</td>
+    </tr>
+    <tr>
+      <td>۴ (آخرین راه)</td>
+      <td><code><span dir="ltr" style="unicode-bidi:isolate">getByTestId</span></code></td>
+      <td>فقط زمانی که هیچ‌کدام از موارد بالا جواب نمی‌دهد</td>
+    </tr>
+  </table>
+
+  <h3 class="sub-title">نقش‌های پیش‌فرض تگ‌های <span dir="ltr" style="unicode-bidi:isolate">HTML</span></h3>
+  <table>
+    <tr><th>تگ <span dir="ltr" style="unicode-bidi:isolate">HTML</span></th><th><span dir="ltr" style="unicode-bidi:isolate">Role</span> پیش‌فرض</th></tr>
+    <tr><td><code>&<span dir="ltr" style="unicode-bidi:isolate">lt</span>;<span dir="ltr" style="unicode-bidi:isolate">button</span>&<span dir="ltr" style="unicode-bidi:isolate">gt</span>;</code></td><td><code><span dir="ltr" style="unicode-bidi:isolate">button</span></code></td></tr>
+    <tr><td><code>&<span dir="ltr" style="unicode-bidi:isolate">lt</span>;<span dir="ltr" style="unicode-bidi:isolate">a href</span>="..."&<span dir="ltr" style="unicode-bidi:isolate">gt</span>;</code></td><td><code><span dir="ltr" style="unicode-bidi:isolate">link</span></code></td></tr>
+    <tr><td><code>&<span dir="ltr" style="unicode-bidi:isolate">lt</span>;<span dir="ltr" style="unicode-bidi:isolate">h1</span>&<span dir="ltr" style="unicode-bidi:isolate">gt</span>;</code> تا <code>&<span dir="ltr" style="unicode-bidi:isolate">lt</span>;<span dir="ltr" style="unicode-bidi:isolate">h6</span>&<span dir="ltr" style="unicode-bidi:isolate">gt</span>;</code></td><td><code><span dir="ltr" style="unicode-bidi:isolate">heading</span></code></td></tr>
+    <tr><td><code>&<span dir="ltr" style="unicode-bidi:isolate">lt</span>;<span dir="ltr" style="unicode-bidi:isolate">img</span>&<span dir="ltr" style="unicode-bidi:isolate">gt</span>;</code></td><td><code><span dir="ltr" style="unicode-bidi:isolate">img</span></code></td></tr>
+    <tr><td><code>&<span dir="ltr" style="unicode-bidi:isolate">lt</span>;<span dir="ltr" style="unicode-bidi:isolate">ul</span>&<span dir="ltr" style="unicode-bidi:isolate">gt</span>;</code> / <code>&<span dir="ltr" style="unicode-bidi:isolate">lt</span>;<span dir="ltr" style="unicode-bidi:isolate">ol</span>&<span dir="ltr" style="unicode-bidi:isolate">gt</span>;</code></td><td><code><span dir="ltr" style="unicode-bidi:isolate">list</span></code></td></tr>
+    <tr><td><code>&<span dir="ltr" style="unicode-bidi:isolate">lt</span>;<span dir="ltr" style="unicode-bidi:isolate">input type</span>="<span dir="ltr" style="unicode-bidi:isolate">text</span>"&<span dir="ltr" style="unicode-bidi:isolate">gt</span>;</code></td><td><code><span dir="ltr" style="unicode-bidi:isolate">textbox</span></code></td></tr>
+  </table>
+
+  <div class="box box-info">
+    <span class="box-title">ابزار دیباگ</span>
+    <p>
+      اگر مطمئن نیستید چه <span dir="ltr" style="unicode-bidi:isolate">role</span> هایی در صفحه رندر شده وجود دارد:
+      <code><span dir="ltr" style="unicode-bidi:isolate">screen.debug()</span></code> کل <span dir="ltr" style="unicode-bidi:isolate">HTML</span> را در ترمینال چاپ می‌کند.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 8. FORM EXAMPLE ============ -->
+<section class="section-break">
+  <h2 class="section-title">۸. مثال عملی: تست فرم و تعامل کاربر</h2>
+
+<pre><code><span class="kw">import</span> userEvent <span class="kw">from</span> <span class="st">'@testing-library/user-event'</span>
+<span class="kw">import</span> { render, screen } <span class="kw">from</span> <span class="st">'@testing-library/react'</span>
+<span class="kw">import</span> { LoginForm } <span class="kw">from</span> <span class="st">'./LoginForm'</span>
+
+it(<span class="st">'should call onSubmit with correct values'</span>, <span class="kw">async</span> () => {
+  <span class="kw">const</span> user = userEvent.setup()
+  <span class="kw">const</span> handleSubmit = vi.fn()
+
+  render(&lt;LoginForm onSubmit={handleSubmit} /&gt;)
+
+  <span class="kw">await</span> user.type(screen.getByLabelText(<span class="st">'ایمیل'</span>), <span class="st">'ali@example.com'</span>)
+  <span class="kw">await</span> user.type(screen.getByLabelText(<span class="st">'رمز عبور'</span>), <span class="st">'123456'</span>)
+  <span class="kw">await</span> user.click(screen.getByRole(<span class="st">'button'</span>, { name: <span class="st">'ورود'</span> }))
+
+  expect(handleSubmit).toHaveBeenCalledWith(<span class="st">'ali@example.com'</span>, <span class="st">'123456'</span>)
+})</code></pre>
+
+  <div class="box box-warning">
+    <span class="box-title">نکته مهم</span>
+    <p>
+      همیشه قبل از هر تست <code><span dir="ltr" style="unicode-bidi:isolate">userEvent.setup()</span></code> صدا زده می‌شود، و هر عملیات تعاملی
+      (<span dir="ltr" style="unicode-bidi:isolate">type</span>، <span dir="ltr" style="unicode-bidi:isolate">click)</span> باید با <code><span dir="ltr" style="unicode-bidi:isolate">await</span></code> فراخوانی شود چون به‌صورت <span dir="ltr" style="unicode-bidi:isolate">async</span> شبیه‌سازی می‌شود.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 9. MOCK FN EXAMPLE ============ -->
+<section class="section-break">
+  <h2 class="section-title">۹. مثال عملی: <span dir="ltr" style="unicode-bidi:isolate">Mock</span> کردن توابع با <span dir="ltr" style="unicode-bidi:isolate">vi.fn</span></h2>
+
+<pre><code><span class="kw">const</span> handleClick = vi.fn()
+
+render(&lt;Button onClick={handleClick}&gt;کلیک کن&lt;/Button&gt;)
+<span class="kw">await</span> userEvent.click(screen.getByRole(<span class="st">'button'</span>))
+
+expect(handleClick).toHaveBeenCalledTimes(1)
+expect(handleClick).toHaveBeenCalledWith(<span class="cm">/* آرگومان‌های مورد انتظار */</span>)</code></pre>
+
+  <p>
+    <code><span dir="ltr" style="unicode-bidi:isolate">vi.fn()</span></code> یک تابع «جاسوسی» (<span dir="ltr" style="unicode-bidi:isolate">spy)</span> می‌سازد که رفتار خودش را ندارد، ولی ثبت می‌کند
+    چند بار و با چه آرگومان‌هایی صدا زده شده است. این برای تست کردن ارتباط بین یک کامپوننت فرزند و
+    <span dir="ltr" style="unicode-bidi:isolate">parent</span> آن، بدون نیاز به اجرای منطق واقعی، بسیار کاربردی است.
+  </p>
+</section>
+
+<!-- ============ 10. ASYNC/API EXAMPLE ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۰. مثال عملی: تست <span dir="ltr" style="unicode-bidi:isolate">async</span> و درخواست‌های <span dir="ltr" style="unicode-bidi:isolate">API</span></h2>
+
+<pre><code>beforeEach(() => {
+  vi.stubGlobal(<span class="st">'fetch'</span>, vi.fn())
+})
+
+afterEach(() => {
+  vi.unstubAllGlobals()
+})
+
+it(<span class="st">'should display user data after successful fetch'</span>, <span class="kw">async</span> () => {
+  vi.mocked(fetch).mockResolvedValue({
+    ok: true,
+    json: <span class="kw">async</span> () => ({ id: 1, name: <span class="st">'رامین'</span> }),
+  } <span class="kw">as</span> Response)
+
+  render(&lt;UserProfile userId={1} /&gt;)
+
+  <span class="cm">// findBy چون داده به‌صورت async می‌رسد</span>
+  <span class="kw">const</span> name = <span class="kw">await</span> screen.findByText(<span class="st">'رامین'</span>)
+  expect(name).toBeInTheDocument()
+})</code></pre>
+
+  <table>
+    <tr><th><span dir="ltr" style="unicode-bidi:isolate">Query</span></th><th>رفتار</th></tr>
+    <tr><td><code><span dir="ltr" style="unicode-bidi:isolate">getByText</span></code></td><td>فوری چک می‌کند، اگر نبود بلافاصله <span dir="ltr" style="unicode-bidi:isolate">fail</span> می‌شود</td></tr>
+    <tr><td><code><span dir="ltr" style="unicode-bidi:isolate">findByText</span></code></td><td><span dir="ltr" style="unicode-bidi:isolate">async</span> است، چند بار <span dir="ltr" style="unicode-bidi:isolate">retry</span> می‌کند — مناسب برای نتیجه <span dir="ltr" style="unicode-bidi:isolate">async</span></td></tr>
+    <tr><td><code><span dir="ltr" style="unicode-bidi:isolate">queryByText</span></code></td><td>اگر نبود <span dir="ltr" style="unicode-bidi:isolate">null</span> برمی‌گرداند — برای بررسی «عدم وجود»</td></tr>
+  </table>
+
+  <div class="box box-info">
+    <span class="box-title">جایگزین بهتر: <span dir="ltr" style="unicode-bidi:isolate">MSW</span></span>
+    <p>
+      به‌جای <span dir="ltr" style="unicode-bidi:isolate">mock</span> دستی <code><span dir="ltr" style="unicode-bidi:isolate">fetch</span></code>، ابزار <b><span dir="ltr" style="unicode-bidi:isolate">Mock Service Worker</span> (<span dir="ltr" style="unicode-bidi:isolate">msw)</span></b> در سطح شبکه
+      درخواست‌ها را می‌گیرد و پاسخ فیک برمی‌گرداند — به کد واقعی نزدیک‌تر و قابل‌نگهداری‌تر است.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 11. CONTEXT EXAMPLE ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۱. مثال عملی: تست کامپوننت با <span dir="ltr" style="unicode-bidi:isolate">Context/Provider</span></h2>
+  <p>
+    اگر کامپوننتی از <code><span dir="ltr" style="unicode-bidi:isolate">useContext</span></code> یا از <code><span dir="ltr" style="unicode-bidi:isolate">react-router</span></code> استفاده کند، هنگام
+    <span dir="ltr" style="unicode-bidi:isolate">render</span> آن باید <span dir="ltr" style="unicode-bidi:isolate">Provider</span> مربوطه را هم دور آن قرار دهیم، وگرنه با خطا مواجه می‌شویم.
+  </p>
+
+<pre><code><span class="kw">function</span> <span class="fn">renderWithTheme</span>(ui: React.ReactElement) {
+  <span class="kw">return</span> render(
+    &lt;ThemeProvider theme={<span class="st">'dark'</span>}&gt;
+      {ui}
+    &lt;/ThemeProvider&gt;
+  )
+}
+
+it(<span class="st">'should render with the dark theme applied'</span>, () => {
+  renderWithTheme(&lt;Header /&gt;)
+  expect(screen.getByRole(<span class="st">'banner'</span>)).toHaveClass(<span class="st">'dark'</span>)
+})</code></pre>
+
+  <p>
+    یک الگوی رایج برای تمیز نگه داشتن تست‌ها، ساخت یک تابع کمکی <code><span dir="ltr" style="unicode-bidi:isolate">renderWithProviders</span></code> است که
+    همه <span dir="ltr" style="unicode-bidi:isolate">Provider</span> های لازم (<span dir="ltr" style="unicode-bidi:isolate">Theme</span>، <span dir="ltr" style="unicode-bidi:isolate">Router</span>، <span dir="ltr" style="unicode-bidi:isolate">Redux Store</span> و...) را یک‌جا اضافه می‌کند تا در هر تست تکرار نشود.
+  </p>
+</section>
+
+<!-- ============ 12. CUSTOM HOOK EXAMPLE ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۲. مثال عملی: تست یک <span dir="ltr" style="unicode-bidi:isolate">Custom Hook</span></h2>
+  <p>
+    برای هوک‌هایی که مستقل از یک کامپوننت خاص هستند، به‌جای رندر کردن یک کامپوننت کامل،
+    از <code><span dir="ltr" style="unicode-bidi:isolate">renderHook</span></code> استفاده می‌کنیم.
+  </p>
+
+<pre><code><span class="kw">import</span> { renderHook, act } <span class="kw">from</span> <span class="st">'@testing-library/react'</span>
+<span class="kw">import</span> { useCounter } <span class="kw">from</span> <span class="st">'./useCounter'</span>
+
+it(<span class="st">'should increment the counter'</span>, () => {
+  <span class="kw">const</span> { result } = renderHook(() => useCounter())
+
+  act(() => {
+    result.current.increment()
+  })
+
+  expect(result.current.count).toBe(1)
+})</code></pre>
+
+  <div class="box box-warning">
+    <span class="box-title">چرا <span dir="ltr" style="unicode-bidi:isolate">act</span> لازم است؟</span>
+    <p>
+      وقتی داخل تست، مستقیم متدی را صدا می‌زنیم که باعث تغییر <span dir="ltr" style="unicode-bidi:isolate">state</span> می‌شود، باید آن را داخل
+      <code><span dir="ltr" style="unicode-bidi:isolate">act()</span></code> بپیچیم تا <span dir="ltr" style="unicode-bidi:isolate">React</span> مطمئن شود همه به‌روزرسانی‌های مربوطه قبل از <span dir="ltr" style="unicode-bidi:isolate">assertion</span> بعدی اعمال شده‌اند.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 13. GOLDEN RULES ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۳. قوانین طلایی تست‌نویسی</h2>
+
+  <div class="box box-rule">
+    <span class="box-title">۱. رفتار را تست کن، نه پیاده‌سازی را</span>
+    <p>به <span dir="ltr" style="unicode-bidi:isolate">state</span> داخلی، نام متغیرها یا جزئیات پیاده‌سازی وابسته نشو؛ فقط چیزی را تست کن که کاربر می‌بیند.</p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۲. اولویت با <span dir="ltr" style="unicode-bidi:isolate">getByRole</span> است</span>
+    <p>اگر همیشه مجبوری از <span dir="ltr" style="unicode-bidi:isolate">getByTestId</span> استفاده کنی، احتمالاً یعنی کامپوننت از نظر <span dir="ltr" style="unicode-bidi:isolate">accessibility</span> ضعیف است.</p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۳. اسم تست باید مثل مستندات خوانده شود</span>
+    <p>اگر تستی <span dir="ltr" style="unicode-bidi:isolate">fail</span> شد، باید فقط از روی اسمش دقیقاً بفهمی چه رفتاری خراب شده.</p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۴. هر تست باید مستقل باشد</span>
+    <p>تست‌ها نباید به ترتیب اجرا یا نتیجه‌ی تست دیگر وابسته باشند.</p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۵. <span dir="ltr" style="unicode-bidi:isolate">Mock</span> را کم و هدفمند نگه دار</span>
+    <p>فقط چیزهای خارج از کنترل تست (شبکه، زمان، <span dir="ltr" style="unicode-bidi:isolate">API</span> مرورگر) را <span dir="ltr" style="unicode-bidi:isolate">mock</span> کن، نه منطق خودِ کامپوننت.</p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۶. هم مسیر موفق و هم مسیر خطا را تست کن</span>
+    <p>تست کردن فقط <span dir="ltr" style="unicode-bidi:isolate">happy path</span> کافی نیست؛ حالت‌های خطا و <span dir="ltr" style="unicode-bidi:isolate">edge case</span> ها اغلب جایی هستند که باگ واقعی رخ می‌دهد.</p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۷. <span dir="ltr" style="unicode-bidi:isolate">Coverage</span> عدد بالا هدف نیست</span>
+    <p>رسیدن به <span dir="ltr" style="unicode-bidi:isolate">coverage</span> صد درصد به معنی نبود باگ نیست؛ روی مسیرهای پرخطر و منطق پیچیده تمرکز کن.</p>
+  </div>
+
+  <div class="box box-bad">
+    <span class="box-title">اشتباه رایج</span>
+    <p>
+      تست کردن جزئیات پیاده‌سازی داخلی، مثل: <code><span dir="ltr" style="unicode-bidi:isolate">expect(component.state.isOpen).toBe(true)</span></code> —
+      این نوع تست با هر تغییر داخلی کد می‌شکند، حتی اگر رفتار واقعی درست باشد.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 14. CHECKLIST ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۴. چک‌لیست نهایی قبل از <span dir="ltr" style="unicode-bidi:isolate">commit</span></h2>
+
+  <div class="checklist-item">☐ اسم تست‌ها گویا و خوانا هستند</div>
+  <div class="checklist-item">☐ از <span dir="ltr" style="unicode-bidi:isolate">getByRole</span> به‌جای <span dir="ltr" style="unicode-bidi:isolate">getByTestId</span> استفاده شده (در صورت امکان)</div>
+  <div class="checklist-item">☐ تست‌ها به ترتیب اجرا یا به هم وابسته نیستند</div>
+  <div class="checklist-item">☐ <span dir="ltr" style="unicode-bidi:isolate">mock</span> ها بعد از هر تست پاک/ریست می‌شوند (<span dir="ltr" style="unicode-bidi:isolate">afterEach)</span></div>
+  <div class="checklist-item">☐ هم حالت موفق (<span dir="ltr" style="unicode-bidi:isolate">happy path)</span> و هم حالت خطا تست شده</div>
+  <div class="checklist-item">☐ برای عملیات <span dir="ltr" style="unicode-bidi:isolate">async</span> از <span dir="ltr" style="unicode-bidi:isolate">await</span> و <span dir="ltr" style="unicode-bidi:isolate">findBy/waitFor</span> استفاده شده</div>
+  <div class="checklist-item">☐ هر <span dir="ltr" style="unicode-bidi:isolate">Provider</span> لازم (<span dir="ltr" style="unicode-bidi:isolate">Theme/Router/Store)</span> هنگام <span dir="ltr" style="unicode-bidi:isolate">render</span> اضافه شده</div>
+</section>
+<!-- ============ 15. MSW ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۵. <span dir="ltr" style="unicode-bidi:isolate">MSW</span> برای <span dir="ltr" style="unicode-bidi:isolate">mock</span> کردن <span dir="ltr" style="unicode-bidi:isolate">API</span></h2>
+
+  <p>
+    <span dir="ltr" style="unicode-bidi:isolate">MSW (Mock Service Worker)</span> استاندارد صنعتی برای <span dir="ltr" style="unicode-bidi:isolate">mock</span> کردن درخواست‌هاست —
+    برخلاف <span dir="ltr" style="unicode-bidi:isolate">mock</span> دستی <span dir="ltr" style="unicode-bidi:isolate">fetch</span>، درخواست‌ها را در سطح شبکه می‌گیرد،
+    یعنی به کد واقعی نزدیک‌تر است.
+  </p>
+
+  <h3 class="sub-title">نصب</h3>
+<pre><code>npm install -D msw</code></pre>
+
+  <h3 class="sub-title">تعریف <span dir="ltr" style="unicode-bidi:isolate">handler</span> ها — src/mocks/handlers.ts</h3>
+<pre><code><span class="kw">import</span> { http, HttpResponse } <span class="kw">from</span> <span class="st">'msw'</span>
+
+<span class="kw">export const</span> handlers = [
+  http.get(<span class="st">'/api/users/:id'</span>, ({ params }) => {
+    <span class="kw">const</span> { id } = params
+
+    <span class="kw">if</span> (id === <span class="st">'999'</span>) {
+      <span class="kw">return new</span> HttpResponse(<span class="kw">null</span>, { status: 404 })
+    }
+
+    <span class="kw">return</span> HttpResponse.json({
+      id: Number(id),
+      name: <span class="st">'رامین'</span>,
+      email: <span class="st">'ramin@example.com'</span>,
+    })
+  }),
+]</code></pre>
+
+  <h3 class="sub-title">راه‌اندازی سرور برای تست — src/mocks/server.ts</h3>
+<pre><code><span class="kw">import</span> { setupServer } <span class="kw">from</span> <span class="st">'msw/node'</span>
+<span class="kw">import</span> { handlers } <span class="kw">from</span> <span class="st">'./handlers'</span>
+
+<span class="kw">export const</span> server = setupServer(...handlers)</code></pre>
+
+  <h3 class="sub-title">فعال‌سازی در src/test/setup.ts</h3>
+<pre><code><span class="kw">import</span> <span class="st">'@testing-library/jest-dom'</span>
+<span class="kw">import</span> { server } <span class="kw">from</span> <span class="st">'../mocks/server'</span>
+
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())</code></pre>
+
+  <h3 class="sub-title">تست تمیز و بدون <span dir="ltr" style="unicode-bidi:isolate">vi.stubGlobal</span></h3>
+<pre><code>it(<span class="st">'should display user data after successful fetch'</span>, <span class="kw">async</span> () => {
+  render(&lt;UserProfile userId={1} /&gt;)
+  expect(<span class="kw">await</span> screen.findByText(<span class="st">'رامین'</span>)).toBeInTheDocument()
+})
+
+it(<span class="st">'should show error for a non-existent user'</span>, <span class="kw">async</span> () => {
+  render(&lt;UserProfile userId={999} /&gt;)
+  expect(<span class="kw">await</span> screen.findByRole(<span class="st">'alert'</span>)).toHaveTextContent(<span class="st">'کاربر پیدا نشد'</span>)
+})</code></pre>
+
+  <table>
+    <tr><th>مزیت</th><th>توضیح</th></tr>
+    <tr><td>نزدیک‌تر به واقعیت</td><td>درخواست واقعی در سطح شبکه گرفته می‌شود، نه جایگزینی تابع</td></tr>
+    <tr><td>قابل استفاده مجدد</td><td>همان <span dir="ltr" style="unicode-bidi:isolate">handler</span> ها در تست و در <span dir="ltr" style="unicode-bidi:isolate">dev mode</span> قابل استفاده‌اند</td></tr>
+    <tr><td>تمیزتر</td><td>نیازی به <span dir="ltr" style="unicode-bidi:isolate">beforeEach/afterEach</span> دستی برای <span dir="ltr" style="unicode-bidi:isolate">fetch</span> نیست</td></tr>
+    <tr><td>مستقل از کتابخانه</td><td>چه <span dir="ltr" style="unicode-bidi:isolate">fetch</span> چه <span dir="ltr" style="unicode-bidi:isolate">axios</span>، فرقی نمی‌کند</td></tr>
+  </table>
+
+  <div class="box box-info">
+    <span class="box-title"><span dir="ltr" style="unicode-bidi:isolate">Override</span> کردن در یک تست خاص</span>
+<pre><code><span class="kw">import</span> { server } <span class="kw">from</span> <span class="st">'../mocks/server'</span>
+<span class="kw">import</span> { http, HttpResponse } <span class="kw">from</span> <span class="st">'msw'</span>
+
+it(<span class="st">'should handle server error'</span>, <span class="kw">async</span> () => {
+  server.use(
+    http.get(<span class="st">'/api/users/:id'</span>, () => <span class="kw">new</span> HttpResponse(<span class="kw">null</span>, { status: 500 }))
+  )
+
+  render(&lt;UserProfile userId={1} /&gt;)
+  expect(<span class="kw">await</span> screen.findByRole(<span class="st">'alert'</span>)).toBeInTheDocument()
+})</code></pre>
+  </div>
+</section>
+
+<!-- ============ 16. vi.mock ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۶. <span dir="ltr" style="unicode-bidi:isolate">vi.mock</span> برای <span dir="ltr" style="unicode-bidi:isolate">mock</span> کردن یک <span dir="ltr" style="unicode-bidi:isolate">module</span></h2>
+
+  <p>
+    گاهی باید یک <span dir="ltr" style="unicode-bidi:isolate">module</span> کامل local (نه یک درخواست شبکه) را جایگزین کنیم —
+    مثلاً یک فایل <span dir="ltr" style="unicode-bidi:isolate">helper</span> که با یک <span dir="ltr" style="unicode-bidi:isolate">SDK</span> خارجی کار می‌کند.
+  </p>
+
+  <h3 class="sub-title">کد اصلی — src/lib/analytics.ts</h3>
+<pre><code><span class="kw">export function</span> <span class="fn">trackEvent</span>(name: string, payload: object) {
+  window.analytics?.track(name, payload)
+}</code></pre>
+
+  <h3 class="sub-title">کامپوننت — src/components/BuyButton.tsx</h3>
+<pre><code><span class="kw">import</span> { trackEvent } <span class="kw">from</span> <span class="st">'../lib/analytics'</span>
+
+<span class="kw">export function</span> <span class="fn">BuyButton</span>() {
+  <span class="kw">function</span> <span class="fn">handleClick</span>() {
+    trackEvent(<span class="st">'buy_clicked'</span>, { source: <span class="st">'homepage'</span> })
+  }
+  <span class="kw">return</span> &lt;button onClick={handleClick}&gt;خرید&lt;/button&gt;
+}</code></pre>
+
+  <h3 class="sub-title">تست</h3>
+<pre><code><span class="kw">import</span> { trackEvent } <span class="kw">from</span> <span class="st">'../lib/analytics'</span>
+
+<span class="cm">// کل ماژول را mock می‌کنیم؛ همه export هایش خودکار vi.fn() می‌شوند</span>
+vi.mock(<span class="st">'../lib/analytics'</span>)
+
+it(<span class="st">'should track event when buy button is clicked'</span>, <span class="kw">async</span> () => {
+  <span class="kw">const</span> user = userEvent.setup()
+  render(&lt;BuyButton /&gt;)
+
+  <span class="kw">await</span> user.click(screen.getByRole(<span class="st">'button'</span>, { name: <span class="st">'خرید'</span> }))
+
+  expect(trackEvent).toHaveBeenCalledWith(<span class="st">'buy_clicked'</span>, { source: <span class="st">'homepage'</span> })
+})</code></pre>
+
+  <div class="box box-warning">
+    <span class="box-title"><span dir="ltr" style="unicode-bidi:isolate">vi.mock</span> باید <span dir="ltr" style="unicode-bidi:isolate">hoisted</span> باشد</span>
+    <p>
+      <span dir="ltr" style="unicode-bidi:isolate">Vitest</span> به‌صورت خودکار فراخوانی <span dir="ltr" style="unicode-bidi:isolate">vi.mock(...)</span> را به بالای فایل منتقل می‌کند
+      (قبل از <span dir="ltr" style="unicode-bidi:isolate">import</span> ها اجرا می‌شود)، ولی بهتر است همیشه بالای فایل نوشته شود تا خوانا بماند.
+    </p>
+  </div>
+
+  <table>
+    <tr><th>ابزار</th><th>چه زمانی استفاده شود</th></tr>
+    <tr><td><span dir="ltr" style="unicode-bidi:isolate">MSW</span></td><td>وقتی چیزی که mock می‌کنید یک درخواست شبکه (HTTP) است</td></tr>
+    <tr><td><span dir="ltr" style="unicode-bidi:isolate">vi.mock</span></td><td>وقتی چیزی که mock می‌کنید یک ماژول/فایل local است (SDK، helper، کامپوننت فرزند سنگین)</td></tr>
+  </table>
+</section>
+
+<!-- ============ 17. FAKE TIMERS ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۷. کنترل زمان با <span dir="ltr" style="unicode-bidi:isolate">Fake Timers</span></h2>
+
+  <h3 class="sub-title">کامپوننت — src/components/Toast.tsx</h3>
+<pre><code><span class="kw">export function</span> <span class="fn">Toast</span>({ message }: { message: string }) {
+  <span class="kw">const</span> [visible, setVisible] = useState(<span class="kw">true</span>)
+
+  useEffect(() => {
+    <span class="kw">const</span> timer = setTimeout(() => setVisible(<span class="kw">false</span>), 3000)
+    <span class="kw">return</span> () => clearTimeout(timer)
+  }, [])
+
+  <span class="kw">if</span> (!visible) <span class="kw">return null</span>
+  <span class="kw">return</span> &lt;div role=<span class="st">"status"</span>&gt;{message}&lt;/div&gt;
+}</code></pre>
+
+  <p>
+    بدون <span dir="ltr" style="unicode-bidi:isolate">fake timer</span>، باید واقعاً ۳ ثانیه در تست صبر کنید. با <span dir="ltr" style="unicode-bidi:isolate">fake timers</span> می‌توانید زمان را جلو ببرید:
+  </p>
+
+<pre><code><span class="kw">import</span> { act } <span class="kw">from</span> <span class="st">'@testing-library/react'</span>
+
+describe(<span class="st">'Toast component'</span>, () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it(<span class="st">'should disappear after 3 seconds'</span>, () => {
+    render(&lt;Toast message=<span class="st">"ذخیره شد"</span> /&gt;)
+
+    expect(screen.getByRole(<span class="st">'status'</span>)).toBeInTheDocument()
+
+    <span class="cm">// زمان را ۳ ثانیه جلو می‌بریم، بدون صبر واقعی</span>
+    act(() => {
+      vi.advanceTimersByTime(3000)
+    })
+
+    expect(screen.queryByRole(<span class="st">'status'</span>)).not.toBeInTheDocument()
+  })
+})</code></pre>
+
+  <div class="box box-warning">
+    <span class="box-title">چرا <span dir="ltr" style="unicode-bidi:isolate">act()</span> اینجا لازم است؟</span>
+    <p>
+      اجرای <code><span dir="ltr" style="unicode-bidi:isolate">setTimeout</span></code> توسط <code><span dir="ltr" style="unicode-bidi:isolate">advanceTimersByTime</span></code>
+      باعث صدا زده شدن <code><span dir="ltr" style="unicode-bidi:isolate">setVisible(false)</span></code> بیرون از یک <span dir="ltr" style="unicode-bidi:isolate">event handler</span> عادی <span dir="ltr" style="unicode-bidi:isolate">React</span> می‌شود.
+      بدون <code><span dir="ltr" style="unicode-bidi:isolate">act()</span></code>، تضمینی نیست که <span dir="ltr" style="unicode-bidi:isolate">re-render</span> ناشی از این تغییر <span dir="ltr" style="unicode-bidi:isolate">state</span> قبل از خط <code><span dir="ltr" style="unicode-bidi:isolate">expect</span></code> بعدی روی DOM اعمال شده باشد —
+      نتیجه‌اش خطایی شبیه <code><span dir="ltr" style="unicode-bidi:isolate">expected document not to contain element, found &lt;div role="status"&gt;</span></code> است،
+      حتی وقتی منطق کامپوننت کاملاً درست است.
+    </p>
+  </div>
+
+  <div class="box box-info">
+    <span class="box-title">ترکیب با <span dir="ltr" style="unicode-bidi:isolate">userEvent</span></span>
+    <p>
+      اگر در همان تست هم از <code><span dir="ltr" style="unicode-bidi:isolate">userEvent</span></code> و هم از <code><span dir="ltr" style="unicode-bidi:isolate">vi.useFakeTimers()</span></code> استفاده می‌کنید،
+      باید موقع <code><span dir="ltr" style="unicode-bidi:isolate">setup</span></code> این را هم مشخص کنید، وگرنه <code><span dir="ltr" style="unicode-bidi:isolate">await user.click(...)</span></code> ممکن است گیر کند:
+    </p>
+<pre><code><span class="kw">const</span> user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime })</code></pre>
+  </div>
+
+  <div class="box box-info">
+    <span class="box-title">کنترل تاریخ سیستم</span>
+    <p>
+      اگر کامپوننت از <code><span dir="ltr" style="unicode-bidi:isolate">Date.now()</span></code> هم استفاده کند، با
+      <code><span dir="ltr" style="unicode-bidi:isolate">vi.setSystemTime(new Date('2026-01-01'))</span></code> قابل کنترل است.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 18. it.each ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۸. تست‌های پارامتری با <span dir="ltr" style="unicode-bidi:isolate">it.each</span></h2>
+
+  <p>
+    وقتی چند ورودی مختلف همان منطق را تست می‌کنند، به‌جای کپی-پیست از <span dir="ltr" style="unicode-bidi:isolate">it.each</span> استفاده کنید:
+  </p>
+
+<pre><code>describe(<span class="st">'isEven'</span>, () => {
+  it.each([
+    [2, <span class="kw">true</span>],
+    [3, <span class="kw">false</span>],
+    [0, <span class="kw">true</span>],
+    [-4, <span class="kw">true</span>],
+    [-7, <span class="kw">false</span>],
+  ])(<span class="st">'isEven(%i) should return %s'</span>, (input, expected) => {
+    expect(isEven(input)).toBe(expected)
+  })
+})</code></pre>
+
+  <p>خروجی این‌طور می‌شود، هر ردیف یک تست جدا حساب می‌شود:</p>
+<pre><code>✓ isEven(2) should return true
+✓ isEven(3) should return false
+✓ isEven(0) should return true
+✓ isEven(-4) should return true
+✓ isEven(-7) should return false</code></pre>
+
+  <p>برای <span dir="ltr" style="unicode-bidi:isolate">object</span> های پیچیده‌تر، از یک آرایه از <span dir="ltr" style="unicode-bidi:isolate">object</span> ها استفاده کنید:</p>
+<pre><code>it.each([
+  { email: <span class="st">''</span>, password: <span class="st">'123456'</span>, expectedError: <span class="st">'ایمیل الزامی است'</span> },
+  { email: <span class="st">'a@b.com'</span>, password: <span class="st">''</span>, expectedError: <span class="st">'رمز عبور الزامی است'</span> },
+])(<span class="st">'should show "$expectedError" when email is "$email"'</span>, <span class="kw">async</span> ({ email, password, expectedError }) => {
+  <span class="cm">// ...</span>
+  expect(screen.getByRole(<span class="st">'alert'</span>)).toHaveTextContent(expectedError)
+})</code></pre>
+
+  <div class="box box-rule">
+    <span class="box-title">چرا مفید است؟</span>
+    <p>از تکرار کد جلوگیری می‌کند، مخصوصاً برای <span dir="ltr" style="unicode-bidi:isolate">validation</span> های فرم که چندین حالت خطا دارند.</p>
+  </div>
+
+  <h3 class="sub-title">مثال دوم (کامل و جداگانه): تست پارامتری اعتبارسنجی فرم لاگین</h3>
+
+  <p>
+    در مثال قبل فقط ساختار کلی <span dir="ltr" style="unicode-bidi:isolate">it.each</span> با <span dir="ltr" style="unicode-bidi:isolate">object</span> را دیدیم.
+    این‌بار یک سناریوی واقعی و کامل را پیاده می‌کنیم: یک فرم لاگین که باید پیام خطای <b>جداگانه</b> برای
+    خالی بودن ایمیل و خالی بودن رمز عبور نشان دهد.
+  </p>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">کامپوننت — src/components/LoginForm.tsx</h4>
+<pre><code><span class="kw">import</span> { useState } <span class="kw">from</span> <span class="st">"react"</span>;
+
+<span class="kw">type</span> LoginFormProps = {
+  onSubmit: (email: string, password: string) =&gt; void;
+};
+
+<span class="kw">export function</span> <span class="fn">LoginForm</span>({ onSubmit }: LoginFormProps) {
+  <span class="kw">const</span> [email, setEmail] = useState(<span class="st">""</span>);
+  <span class="kw">const</span> [password, setPassword] = useState(<span class="st">""</span>);
+  <span class="kw">const</span> [error, setError] = useState(<span class="st">""</span>);
+
+  <span class="kw">function</span> <span class="fn">handleSubmit</span>(e: React.SubmitEvent&lt;HTMLFormElement&gt;) {
+    e.preventDefault();
+
+    <span class="kw">if</span> (!email) {
+      setError(<span class="st">"ایمیل الزامی است"</span>);
+      <span class="kw">return</span>;
+    }
+
+    <span class="kw">if</span> (!password) {
+      setError(<span class="st">"رمز عبور الزامی است"</span>);
+      <span class="kw">return</span>;
+    }
+
+    setError(<span class="st">""</span>);
+    onSubmit(email, password);
+  }
+
+  <span class="kw">return</span> (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;label htmlFor=<span class="st">"email"</span>&gt;ایمیل&lt;/label&gt;
+      &lt;input
+        id=<span class="st">"email"</span>
+        type=<span class="st">"email"</span>
+        value={email}
+        onChange={(e) =&gt; setEmail(e.target.value)}
+      /&gt;
+
+      &lt;label htmlFor=<span class="st">"password"</span>&gt;رمز عبور&lt;/label&gt;
+      &lt;input
+        id=<span class="st">"password"</span>
+        type=<span class="st">"password"</span>
+        value={password}
+        onChange={(e) =&gt; setPassword(e.target.value)}
+      /&gt;
+
+      {error &amp;&amp; &lt;p role=<span class="st">"alert"</span>&gt;{error}&lt;/p&gt;}
+
+      &lt;button type=<span class="st">"submit"</span>&gt;ورود&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">تست کامل — src/components/LoginForm.test.tsx</h4>
+<pre><code><span class="kw">import</span> { describe, it, expect, vi } <span class="kw">from</span> <span class="st">"vitest"</span>;
+<span class="kw">import</span> { render, screen } <span class="kw">from</span> <span class="st">"@testing-library/react"</span>;
+<span class="kw">import</span> userEvent <span class="kw">from</span> <span class="st">"@testing-library/user-event"</span>;
+<span class="kw">import</span> { LoginForm } <span class="kw">from</span> <span class="st">"./LoginForm"</span>;
+
+describe(<span class="st">"LoginForm component"</span>, () => {
+  it.each([
+    { email: <span class="st">""</span>, password: <span class="st">"123456"</span>, expectedError: <span class="st">"ایمیل الزامی است"</span> },
+    { email: <span class="st">"a@b.com"</span>, password: <span class="st">""</span>, expectedError: <span class="st">"رمز عبور الزامی است"</span> },
+  ])(
+    <span class="st">'should show "$expectedError" when email is "$email"'</span>,
+    <span class="kw">async</span> ({ email, password, expectedError }) => {
+      <span class="kw">const</span> user = userEvent.setup();
+      render(&lt;LoginForm onSubmit={vi.fn()} /&gt;);
+
+      <span class="cm">// فقط فیلدهایی که مقدار دارند را پر می‌کنیم</span>
+      <span class="kw">if</span> (email) {
+        <span class="kw">await</span> user.type(screen.getByLabelText(<span class="st">"ایمیل"</span>), email);
+      }
+      <span class="kw">if</span> (password) {
+        <span class="kw">await</span> user.type(screen.getByLabelText(<span class="st">"رمز عبور"</span>), password);
+      }
+
+      <span class="kw">await</span> user.click(screen.getByRole(<span class="st">"button"</span>, { name: <span class="st">"ورود"</span> }));
+
+      expect(screen.getByRole(<span class="st">"alert"</span>)).toHaveTextContent(expectedError);
+    },
+  );
+
+  it(<span class="st">"should call onSubmit when both fields are filled"</span>, <span class="kw">async</span> () => {
+    <span class="kw">const</span> user = userEvent.setup();
+    <span class="kw">const</span> handleSubmit = vi.fn();
+
+    render(&lt;LoginForm onSubmit={handleSubmit} /&gt;);
+
+    <span class="kw">await</span> user.type(screen.getByLabelText(<span class="st">"ایمیل"</span>), <span class="st">"a@b.com"</span>);
+    <span class="kw">await</span> user.type(screen.getByLabelText(<span class="st">"رمز عبور"</span>), <span class="st">"123456"</span>);
+    <span class="kw">await</span> user.click(screen.getByRole(<span class="st">"button"</span>, { name: <span class="st">"ورود"</span> }));
+
+    expect(handleSubmit).toHaveBeenCalledWith(<span class="st">"a@b.com"</span>, <span class="st">"123456"</span>);
+  });
+});</code></pre>
+
+  <p>خروجی اجرای این تست‌ها:</p>
+<pre><code>✓ LoginForm component &gt; should show "ایمیل الزامی است" when email is ""
+✓ LoginForm component &gt; should show "رمز عبور الزامی است" when email is "a@b.com"
+✓ LoginForm component &gt; should call onSubmit when both fields are filled</code></pre>
+
+  <div class="box box-info">
+    <span class="box-title">۱. چرا <code>if (email) { ... }</code> قبل از <span dir="ltr" style="unicode-bidi:isolate">user.type</span>؟</span>
+    <p>
+      چون بعضی سناریوها عمداً یک فیلد را خالی می‌گذارند (مثلاً سناریوی اول <code>password: "123456"</code> دارد ولی
+      <code>email: ""</code>). اگر بخواهیم <code>user.type(input, "")</code> بزنیم، عملاً هیچ کاری نمی‌کند (چون چیزی
+      برای تایپ نیست)، ولی برای خوانایی و جلوگیری از رفتار غیرمنتظره، بهتر است صریح چک کنیم.
+    </p>
+  </div>
+
+  <div class="box box-info">
+    <span class="box-title">۲. الگوی نام‌گذاری پویا <code>'should show "$expectedError" when email is "$email"'</code></span>
+    <p>
+      وقتی از <span dir="ltr" style="unicode-bidi:isolate">object</span> به‌جای آرایه‌ی ساده استفاده می‌کنید، <span dir="ltr" style="unicode-bidi:isolate">Vitest</span> اجازه می‌دهد
+      مستقیم از <code>$propertyName</code> در اسم تست استفاده کنید. نتیجه‌اش این است که در خروجی تست، به‌جای
+      دیدن چیزی مبهم مثل <code>case 1</code>، <code>case 2</code>، دقیقاً می‌بینید هر تست چه سناریویی را با چه مقادیری پوشش می‌دهد.
+    </p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۳. چرا یک تست جدا برای حالت موفق نوشتیم؟</span>
+    <p>
+      چون <span dir="ltr" style="unicode-bidi:isolate">it.each</span> بالا فقط مسیرهای <b>خطا</b> را پوشش می‌دهد. طبق قانون طلایی
+      «هم مسیر موفق و هم مسیر خطا را تست کن» (بخش ۱۳)، باید حالت موفق (<span dir="ltr" style="unicode-bidi:isolate">happy path</span>) را هم
+      جداگانه و مستقل تست کنیم — نمی‌شود آن را داخل همان <span dir="ltr" style="unicode-bidi:isolate">it.each</span> جا داد چون ساختار داده‌ی
+      سناریوهای خطا (که انتظار پیام <span dir="ltr" style="unicode-bidi:isolate">alert</span> دارند) با سناریوی موفق (که انتظار صدا زده شدن
+      <code>onSubmit</code> دارد) از نظر منطقی فرق دارد.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 19. REACT ROUTER ============ -->
+<section class="section-break">
+  <h2 class="section-title">۱۹. تست کامپوننت با <span dir="ltr" style="unicode-bidi:isolate">React Router</span></h2>
+
+  <h3 class="sub-title">کامپوننت — src/pages/ProductPage.tsx</h3>
+<pre><code><span class="kw">import</span> { Link, useNavigate, useParams } <span class="kw">from</span> <span class="st">'react-router-dom'</span>
+
+<span class="kw">export function</span> <span class="fn">ProductPage</span>() {
+  <span class="kw">const</span> { productId } = useParams()
+  <span class="kw">const</span> navigate = useNavigate()
+
+  <span class="kw">return</span> (
+    &lt;div&gt;
+      &lt;h1&gt;محصول شماره {productId}&lt;/h1&gt;
+      &lt;Link to=<span class="st">"/cart"</span>&gt;رفتن به سبد خرید&lt;/Link&gt;
+      &lt;button onClick={() =&gt; navigate(<span class="st">'/checkout'</span>)}&gt;ادامه خرید&lt;/button&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+
+  <p>
+    چون از <code><span dir="ltr" style="unicode-bidi:isolate">useParams</span></code> و <code><span dir="ltr" style="unicode-bidi:isolate">useNavigate</span></code> استفاده می‌کند،
+    باید داخل یک <code><span dir="ltr" style="unicode-bidi:isolate">Router</span></code> رندر شود. بهترین گزینه <code><span dir="ltr" style="unicode-bidi:isolate">MemoryRouter</span></code> است
+    (یک <span dir="ltr" style="unicode-bidi:isolate">router</span> که در حافظه کار می‌کند، نه در مرورگر واقعی):
+  </p>
+
+<pre><code><span class="kw">import</span> { MemoryRouter, Routes, Route } <span class="kw">from</span> <span class="st">'react-router-dom'</span>
+
+<span class="kw">function</span> <span class="fn">renderWithRouter</span>(initialPath: string) {
+  <span class="kw">return</span> render(
+    &lt;MemoryRouter initialEntries={[initialPath]}&gt;
+      &lt;Routes&gt;
+        &lt;Route path=<span class="st">"/products/:productId"</span> element={&lt;ProductPage /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/MemoryRouter&gt;
+  )
+}
+
+it(<span class="st">'should display the correct product id from the URL'</span>, () => {
+  renderWithRouter(<span class="st">'/products/42'</span>)
+  expect(screen.getByText(<span class="st">'محصول شماره 42'</span>)).toBeInTheDocument()
+})
+
+it(<span class="st">'should have a link to the cart page'</span>, () => {
+  renderWithRouter(<span class="st">'/products/42'</span>)
+  <span class="kw">const</span> link = screen.getByRole(<span class="st">'link'</span>, { name: <span class="st">'رفتن به سبد خرید'</span> })
+  expect(link).toHaveAttribute(<span class="st">'href'</span>, <span class="st">'/cart'</span>)
+})</code></pre>
+
+  <h3 class="sub-title">تست <span dir="ltr" style="unicode-bidi:isolate">navigate</span> شدن</h3>
+<pre><code>it(<span class="st">'should navigate to checkout when button is clicked'</span>, <span class="kw">async</span> () => {
+  <span class="kw">const</span> user = userEvent.setup()
+
+  render(
+    &lt;MemoryRouter initialEntries={[<span class="st">'/products/42'</span>]}&gt;
+      &lt;Routes&gt;
+        &lt;Route path=<span class="st">"/products/:productId"</span> element={&lt;ProductPage /&gt;} /&gt;
+        &lt;Route path=<span class="st">"/checkout"</span> element={&lt;h1&gt;صفحه تسویه حساب&lt;/h1&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/MemoryRouter&gt;
+  )
+
+  <span class="kw">await</span> user.click(screen.getByRole(<span class="st">'button'</span>, { name: <span class="st">'ادامه خرید'</span> }))
+
+  <span class="cm">// چون صفحه واقعاً عوض شده، محتوای صفحه جدید دیده می‌شود</span>
+  expect(<span class="kw">await</span> screen.findByText(<span class="st">'صفحه تسویه حساب'</span>)).toBeInTheDocument()
+})</code></pre>
+
+  <div class="box box-rule">
+    <span class="box-title">فلسفه مهم</span>
+    <p>
+      به‌جای چک کردن اینکه <span dir="ltr" style="unicode-bidi:isolate">navigate</span> با چه آرگومانی صدا زده شده (implementation detail)،
+      چک می‌کنیم صفحه واقعاً عوض شده — همان فلسفه‌ی «تست رفتار، نه پیاده‌سازی».
+    </p>
+  </div>
+</section>
+
+<!-- ============ 20. ZUSTAND/REDUX ============ -->
+<section class="section-break">
+  <h2 class="section-title">۲۰. تست کامپوننت متصل به <span dir="ltr" style="unicode-bidi:isolate">Zustand/Redux</span></h2>
+
+  <h3 class="sub-title">با <span dir="ltr" style="unicode-bidi:isolate">Zustand</span> (ساده‌تر، چون <span dir="ltr" style="unicode-bidi:isolate">store</span> فقط یک <span dir="ltr" style="unicode-bidi:isolate">hook</span> است)</h3>
+
+<pre><code><span class="cm">// src/store/cartStore.ts</span>
+<span class="kw">import</span> { create } <span class="kw">from</span> <span class="st">'zustand'</span>
+
+<span class="kw">type</span> CartStore = {
+  items: string[]
+  addItem: (item: string) =&gt; void
+}
+
+<span class="kw">export const</span> useCartStore = create&lt;CartStore&gt;((set) =&gt; ({
+  items: [],
+  addItem: (item) =&gt; set((state) =&gt; ({ items: [...state.items, item] })),
+}))</code></pre>
+
+  <p>
+    چون <span dir="ltr" style="unicode-bidi:isolate">Zustand</span> یک <span dir="ltr" style="unicode-bidi:isolate">store</span> سراسری (global singleton) است،
+    باید <span dir="ltr" style="unicode-bidi:isolate">state</span> را بین تست‌ها ریست کنید:
+  </p>
+
+<pre><code>beforeEach(() => {
+  <span class="cm">// ریست کردن store قبل از هر تست، وگرنه تست‌ها روی هم اثر می‌گذارند</span>
+  useCartStore.setState({ items: [] })
+})
+
+it(<span class="st">'should add item to cart when button is clicked'</span>, <span class="kw">async</span> () => {
+  <span class="kw">const</span> user = userEvent.setup()
+  render(&lt;AddToCartButton productName=<span class="st">"کفش"</span> /&gt;)
+
+  <span class="kw">await</span> user.click(screen.getByRole(<span class="st">'button'</span>, { name: <span class="st">'افزودن به سبد'</span> }))
+
+  expect(useCartStore.getState().items).toContain(<span class="st">'کفش'</span>)
+})</code></pre>
+
+  <h3 class="sub-title">با <span dir="ltr" style="unicode-bidi:isolate">Redux Toolkit</span> (نیاز به <span dir="ltr" style="unicode-bidi:isolate">Provider</span> دارد) — مثال کامل</h3>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۱. تعریف Slice — src/store/cartSlice.ts</h4>
+<pre><code><span class="kw">import</span> { createSlice, PayloadAction } <span class="kw">from</span> <span class="st">"@reduxjs/toolkit"</span>;
+
+<span class="kw">type</span> CartState = {
+  items: string[];
+};
+
+<span class="kw">const</span> initialState: CartState = {
+  items: [],
+};
+
+<span class="kw">const</span> cartSlice = createSlice({
+  name: <span class="st">"cart"</span>,
+  initialState,
+  reducers: {
+    addItem: (state, action: PayloadAction&lt;string&gt;) => {
+      state.items.push(action.payload);
+    },
+    removeItem: (state, action: PayloadAction&lt;string&gt;) => {
+      state.items = state.items.filter((item) => item !== action.payload);
+    },
+    clearCart: (state) => {
+      state.items = [];
+    },
+  },
+});
+
+<span class="kw">export const</span> { addItem, removeItem, clearCart } = cartSlice.actions;
+<span class="kw">export default</span> cartSlice.reducer;</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۲. کامپوننت نمایش تعداد — src/components/CartSummary.tsx</h4>
+<pre><code><span class="kw">import</span> { useSelector } <span class="kw">from</span> <span class="st">"react-redux"</span>;
+<span class="kw">import type</span> { RootState } <span class="kw">from</span> <span class="st">"../store/store"</span>;
+
+<span class="kw">export function</span> <span class="fn">CartSummary</span>() {
+  <span class="kw">const</span> items = useSelector((state: RootState) => state.cart.items);
+
+  <span class="kw">return</span> &lt;p&gt;{items.length} کالا در سبد&lt;/p&gt;;
+}</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۳. کامپوننت افزودن به سبد — src/components/AddToCartButton.tsx</h4>
+<pre><code><span class="kw">import</span> { useDispatch } <span class="kw">from</span> <span class="st">"react-redux"</span>;
+<span class="kw">import</span> { addItem } <span class="kw">from</span> <span class="st">"../store/cartSlice"</span>;
+
+<span class="kw">type</span> AddToCartButtonProps = {
+  productName: string;
+};
+
+<span class="kw">export function</span> <span class="fn">AddToCartButton</span>({ productName }: AddToCartButtonProps) {
+  <span class="kw">const</span> dispatch = useDispatch();
+
+  <span class="kw">return</span> (
+    &lt;button onClick={() =&gt; dispatch(addItem(productName))}&gt;
+      افزودن {productName} به سبد
+    &lt;/button&gt;
+  );
+}</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۴. تعریف RootState — src/store/store.ts</h4>
+<pre><code><span class="kw">import</span> { configureStore } <span class="kw">from</span> <span class="st">"@reduxjs/toolkit"</span>;
+<span class="kw">import</span> cartReducer <span class="kw">from</span> <span class="st">"./cartSlice"</span>;
+
+<span class="kw">export const</span> store = configureStore({
+  reducer: { cart: cartReducer },
+});
+
+<span class="kw">export type</span> RootState = ReturnType&lt;typeof store.getState&gt;;
+<span class="kw">export type</span> AppDispatch = typeof store.dispatch;</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۵. تست کامل — src/components/CartSummary.test.tsx</h4>
+<pre><code><span class="kw">import</span> { describe, it, expect } <span class="kw">from</span> <span class="st">"vitest"</span>;
+<span class="kw">import</span> { render, screen } <span class="kw">from</span> <span class="st">"@testing-library/react"</span>;
+<span class="kw">import</span> userEvent <span class="kw">from</span> <span class="st">"@testing-library/user-event"</span>;
+<span class="kw">import</span> { Provider } <span class="kw">from</span> <span class="st">"react-redux"</span>;
+<span class="kw">import</span> { configureStore } <span class="kw">from</span> <span class="st">"@reduxjs/toolkit"</span>;
+<span class="kw">import</span> cartReducer <span class="kw">from</span> <span class="st">"../store/cartSlice"</span>;
+<span class="kw">import</span> { CartSummary } <span class="kw">from</span> <span class="st">"./CartSummary"</span>;
+<span class="kw">import</span> { AddToCartButton } <span class="kw">from</span> <span class="st">"./AddToCartButton"</span>;
+
+<span class="kw">function</span> <span class="fn">renderWithStore</span>(
+  ui: React.ReactElement,
+  preloadedState: { cart?: { items: string[] } } = {},
+) {
+  <span class="kw">const</span> store = configureStore({
+    reducer: { cart: cartReducer },
+    preloadedState,
+  });
+
+  <span class="kw">return</span> {
+    ...render(&lt;Provider store={store}&gt;{ui}&lt;/Provider&gt;),
+    store, <span class="cm">// برگرداندن store برای بررسی مستقیم state در صورت نیاز</span>
+  };
+}
+
+describe(<span class="st">"CartSummary component"</span>, () => {
+  it(<span class="st">"should show zero items when cart is empty"</span>, () => {
+    renderWithStore(&lt;CartSummary /&gt;);
+
+    expect(screen.getByText(<span class="st">"0 کالا در سبد"</span>)).toBeInTheDocument();
+  });
+
+  it(<span class="st">"should show preloaded items count"</span>, () => {
+    renderWithStore(&lt;CartSummary /&gt;, {
+      cart: { items: [<span class="st">"کفش"</span>, <span class="st">"کیف"</span>] },
+    });
+
+    expect(screen.getByText(<span class="st">"2 کالا در سبد"</span>)).toBeInTheDocument();
+  });
+});
+
+describe(<span class="st">"AddToCartButton + CartSummary integration"</span>, () => {
+  it(<span class="st">"should update cart summary when item is added"</span>, <span class="kw">async</span> () => {
+    <span class="kw">const</span> user = userEvent.setup();
+
+    renderWithStore(
+      &lt;&gt;
+        &lt;AddToCartButton productName=<span class="st">"کفش"</span> /&gt;
+        &lt;CartSummary /&gt;
+      &lt;/&gt;,
+    );
+
+    expect(screen.getByText(<span class="st">"0 کالا در سبد"</span>)).toBeInTheDocument();
+
+    <span class="kw">await</span> user.click(
+      screen.getByRole(<span class="st">"button"</span>, { name: <span class="st">"افزودن کفش به سبد"</span> }),
+    );
+
+    expect(screen.getByText(<span class="st">"1 کالا در سبد"</span>)).toBeInTheDocument();
+  });
+});</code></pre>
+
+  <div class="box box-info">
+    <span class="box-title">۱. چرا <code>store</code> را هم از <span dir="ltr" style="unicode-bidi:isolate">renderWithStore</span> برمی‌گردانیم؟</span>
+    <p>
+      گاهی می‌خواهید مستقیم <span dir="ltr" style="unicode-bidi:isolate">state</span> را چک کنید بدون وابستگی به UI:
+      <code>expect(store.getState().cart.items).toContain('کفش')</code>. این برای وقتی است که تست کردن از طریق UI
+      سخت یا غیرممکن است.
+    </p>
+  </div>
+
+  <div class="box box-info">
+    <span class="box-title">۲. چرا تست سوم (integration) هم <span dir="ltr" style="unicode-bidi:isolate">AddToCartButton</span> و هم <span dir="ltr" style="unicode-bidi:isolate">CartSummary</span> را با هم رندر می‌کند؟</span>
+    <p>
+      چون می‌خواهیم مطمئن شویم این دو کامپوننت <b>مستقل از هم، از طریق store</b> با هم در ارتباط‌اند — دقیقاً
+      همان الگوی <span dir="ltr" style="unicode-bidi:isolate">integration test</span> که در بخش ۲۱ هم دیدیم: تست ارتباط واقعی، نه فرض کردنش.
+    </p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۳. چرا هر تست یک <span dir="ltr" style="unicode-bidi:isolate">store</span> جدید می‌سازد؟</span>
+    <p>
+      برخلاف <span dir="ltr" style="unicode-bidi:isolate">Zustand</span> که یک <span dir="ltr" style="unicode-bidi:isolate">store</span> سراسری (<span dir="ltr" style="unicode-bidi:isolate">singleton</span>) بود
+      و نیاز به ریست دستی در <code>beforeEach</code> داشت، اینجا هر تست با صدا زدن <code>configureStore</code>
+      یک نمونه‌ی کاملاً مستقل و ایزوله می‌سازد — پس تست‌ها هرگز روی state یکدیگر اثر نمی‌گذارند و نیازی
+      به ریست دستی نیست.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 21. FULL FLOW ============ -->
+<section class="section-break">
+  <h2 class="section-title">۲۱. مثال عملی: تست یک فلوی کامل (<span dir="ltr" style="unicode-bidi:isolate">Integration</span> واقعی)</h2>
+
+  <p>
+    یک صفحه لیست محصولات که با کلیک روی «افزودن به سبد»، هم مقدار سبد آپدیت می‌شود هم پیام موفقیت (<span dir="ltr" style="unicode-bidi:isolate">toast</span>)
+    نشان داده می‌شود. این‌بار به‌جای خلاصه، همه‌ی کامپوننت‌ها را کامل می‌سازیم.
+  </p>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۱. Slice — src/store/redux/cartSlice.ts</h4>
+<pre><code><span class="kw">import</span> { createSlice, PayloadAction } <span class="kw">from</span> <span class="st">"@reduxjs/toolkit"</span>;
+
+<span class="kw">export type</span> CartState = {
+  items: string[];
+};
+
+<span class="kw">const</span> initialState: CartState = {
+  items: [],
+};
+
+<span class="kw">const</span> cartSlice = createSlice({
+  name: <span class="st">"cart"</span>,
+  initialState,
+  reducers: {
+    addItem: (state, action: PayloadAction&lt;string&gt;) => {
+      state.items.push(action.payload);
+    },
+  },
+});
+
+<span class="kw">export const</span> { addItem } = cartSlice.actions;
+<span class="kw">export default</span> cartSlice.reducer;</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۲. کامپوننت لیست محصولات (شامل toast محلی) — src/components/ProductList.tsx</h4>
+<pre><code><span class="kw">import</span> { useState } <span class="kw">from</span> <span class="st">"react"</span>;
+<span class="kw">import</span> { useDispatch } <span class="kw">from</span> <span class="st">"react-redux"</span>;
+<span class="kw">import</span> { addItem } <span class="kw">from</span> <span class="st">"../store/redux/cartSlice"</span>;
+<span class="kw">import</span> { Toast } <span class="kw">from</span> <span class="st">"./Toast"</span>;
+
+<span class="kw">type</span> Product = {
+  id: string;
+  name: string;
+};
+
+<span class="kw">const</span> products: Product[] = [
+  { id: <span class="st">"1"</span>, name: <span class="st">"کفش"</span> },
+  { id: <span class="st">"2"</span>, name: <span class="st">"کیف"</span> },
+];
+
+<span class="kw">export function</span> <span class="fn">ProductList</span>() {
+  <span class="kw">const</span> dispatch = useDispatch();
+  <span class="kw">const</span> [toastMessage, setToastMessage] = useState&lt;string | null&gt;(<span class="kw">null</span>);
+
+  <span class="kw">function</span> <span class="fn">handleAddToCart</span>(product: Product) {
+    dispatch(addItem(product.name));
+    setToastMessage(<span class="st">`${product.name} به سبد اضافه شد`</span>);
+  }
+
+  <span class="kw">return</span> (
+    &lt;div&gt;
+      &lt;ul&gt;
+        {products.map((product) =&gt; (
+          &lt;li key={product.id}&gt;
+            {product.name}
+            &lt;button onClick={() =&gt; handleAddToCart(product)}&gt;
+              افزودن به سبد
+            &lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      {toastMessage &amp;&amp; &lt;Toast message={toastMessage} /&gt;}
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۳. کامپوننت Toast (از بخش ۱۷، بدون تغییر ساختاری) — src/components/Toast.tsx</h4>
+<pre><code><span class="kw">import</span> { useEffect, useState } <span class="kw">from</span> <span class="st">"react"</span>;
+
+<span class="kw">export function</span> <span class="fn">Toast</span>({ message }: { message: string }) {
+  <span class="kw">const</span> [visible, setVisible] = useState(<span class="kw">true</span>);
+
+  useEffect(() =&gt; {
+    setVisible(<span class="kw">true</span>); <span class="cm">// با تغییر message دوباره نمایش داده شود</span>
+    <span class="kw">const</span> timer = setTimeout(() =&gt; setVisible(<span class="kw">false</span>), 3000);
+    <span class="kw">return</span> () =&gt; clearTimeout(timer);
+  }, [message]);
+
+  <span class="kw">if</span> (!visible) <span class="kw">return null</span>;
+  <span class="kw">return</span> &lt;div role=<span class="st">"status"</span>&gt;{message}&lt;/div&gt;;
+}</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۴. کامپوننت نشانگر سبد — src/components/CartIndicator.tsx</h4>
+<pre><code><span class="kw">import</span> { useSelector } <span class="kw">from</span> <span class="st">"react-redux"</span>;
+<span class="kw">import type</span> { RootState } <span class="kw">from</span> <span class="st">"../store/redux/store"</span>;
+
+<span class="kw">export function</span> <span class="fn">CartIndicator</span>() {
+  <span class="kw">const</span> items = useSelector((state: RootState) =&gt; state.cart.items);
+
+  <span class="kw">return</span> &lt;p&gt;{items.length} کالا در سبد&lt;/p&gt;;
+}</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۵. تعریف Store — src/store/redux/store.ts</h4>
+<pre><code><span class="kw">import</span> { configureStore } <span class="kw">from</span> <span class="st">"@reduxjs/toolkit"</span>;
+<span class="kw">import</span> cartReducer <span class="kw">from</span> <span class="st">"./cartSlice"</span>;
+
+<span class="kw">export const</span> store = configureStore({
+  reducer: { cart: cartReducer },
+});
+
+<span class="kw">export type</span> RootState = ReturnType&lt;typeof store.getState&gt;;</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۶. صفحه نهایی — src/pages/ProductListPage.tsx</h4>
+<pre><code><span class="kw">import</span> { ProductList } <span class="kw">from</span> <span class="st">"../components/ProductList"</span>;
+<span class="kw">import</span> { CartIndicator } <span class="kw">from</span> <span class="st">"../components/CartIndicator"</span>;
+
+<span class="kw">export function</span> <span class="fn">ProductListPage</span>() {
+  <span class="kw">return</span> (
+    &lt;div&gt;
+      &lt;CartIndicator /&gt;
+      &lt;ProductList /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+  <h4 style="color:#2f5aa8; font-size:13px; margin-top:16px;">۷. تست کامل — src/pages/ProductListPage.test.tsx</h4>
+<pre><code><span class="kw">import</span> { describe, it, expect } <span class="kw">from</span> <span class="st">"vitest"</span>;
+<span class="kw">import</span> { render, screen } <span class="kw">from</span> <span class="st">"@testing-library/react"</span>;
+<span class="kw">import</span> userEvent <span class="kw">from</span> <span class="st">"@testing-library/user-event"</span>;
+<span class="kw">import</span> { Provider } <span class="kw">from</span> <span class="st">"react-redux"</span>;
+<span class="kw">import</span> { configureStore } <span class="kw">from</span> <span class="st">"@reduxjs/toolkit"</span>;
+<span class="kw">import</span> cartReducer <span class="kw">from</span> <span class="st">"../store/redux/cartSlice"</span>;
+<span class="kw">import</span> { ProductListPage } <span class="kw">from</span> <span class="st">"./ProductListPage"</span>;
+
+<span class="kw">function</span> <span class="fn">renderPage</span>() {
+  <span class="kw">const</span> store = configureStore({ reducer: { cart: cartReducer } });
+  <span class="kw">return</span> render(
+    &lt;Provider store={store}&gt;
+      &lt;ProductListPage /&gt;
+    &lt;/Provider&gt;,
+  );
+}
+
+describe(<span class="st">"ProductListPage integration"</span>, () =&gt; {
+  it(<span class="st">"should start with an empty cart"</span>, () =&gt; {
+    renderPage();
+
+    expect(screen.getByText(<span class="st">"0 کالا در سبد"</span>)).toBeInTheDocument();
+  });
+
+  it(<span class="st">"should update cart indicator and show toast after adding a product"</span>, <span class="kw">async</span> () =&gt; {
+    <span class="kw">const</span> user = userEvent.setup();
+    renderPage();
+
+    <span class="kw">const</span> addButtons = screen.getAllByRole(<span class="st">"button"</span>, { name: <span class="st">"افزودن به سبد"</span> });
+    <span class="kw">await</span> user.click(addButtons[0]); <span class="cm">// اولین محصول: کفش</span>
+
+    expect(screen.getByText(<span class="st">"1 کالا در سبد"</span>)).toBeInTheDocument();
+    expect(<span class="kw">await</span> screen.findByRole(<span class="st">"status"</span>)).toHaveTextContent(
+      <span class="st">"کفش به سبد اضافه شد"</span>,
+    );
+  });
+
+  it(<span class="st">"should allow adding multiple different products"</span>, <span class="kw">async</span> () =&gt; {
+    <span class="kw">const</span> user = userEvent.setup();
+    renderPage();
+
+    <span class="kw">const</span> addButtons = screen.getAllByRole(<span class="st">"button"</span>, { name: <span class="st">"افزودن به سبد"</span> });
+    <span class="kw">await</span> user.click(addButtons[0]); <span class="cm">// کفش</span>
+    <span class="kw">await</span> user.click(addButtons[1]); <span class="cm">// کیف</span>
+
+    expect(screen.getByText(<span class="st">"2 کالا در سبد"</span>)).toBeInTheDocument();
+    expect(<span class="kw">await</span> screen.findByRole(<span class="st">"status"</span>)).toHaveTextContent(
+      <span class="st">"کیف به سبد اضافه شد"</span>,
+    );
+  });
+});</code></pre>
+
+  <div class="box box-info">
+    <span class="box-title">۱. چرا از کامپوننت <span dir="ltr" style="unicode-bidi:isolate">Toast</span> بخش ۱۷ دوباره استفاده کردیم؟</span>
+    <p>
+      این نشان می‌دهد چطور یک کامپوننت کوچک و مستقل می‌تواند در چند جای مختلف برنامه استفاده شود. چون قبلاً
+      جداگانه تست کرده‌ایم که <span dir="ltr" style="unicode-bidi:isolate">Toast</span> بعد از ۳ ثانیه محو می‌شود، اینجا لازم نیست دوباره آن رفتار را
+      تست کنیم؛ فقط چک می‌کنیم که <b>ظاهر می‌شود</b> و پیام درستی دارد.
+    </p>
+  </div>
+
+  <div class="box box-info">
+    <span class="box-title">۲. چرا در <span dir="ltr" style="unicode-bidi:isolate">Toast</span> یک <span dir="ltr" style="unicode-bidi:isolate">useEffect</span> با وابستگی به <span dir="ltr" style="unicode-bidi:isolate">message</span> اضافه شد؟</span>
+    <p>
+      اگر کاربر پشت‌سرهم دو محصول مختلف اضافه کند، باید <span dir="ltr" style="unicode-bidi:isolate">toast</span> برای پیام دوم هم دوباره نمایش داده شود
+      (نه اینکه چون از قبل <code>visible</code> بوده، افکت دوباره اجرا نشود).
+    </p>
+  </div>
+
+  <div class="box box-warning">
+    <span class="box-title">۳. چرا از <span dir="ltr" style="unicode-bidi:isolate">getAllByRole</span> استفاده کردیم، نه <span dir="ltr" style="unicode-bidi:isolate">getByRole</span>؟</span>
+    <p>
+      چون در صفحه چند دکمه با اسم یکسان («افزودن به سبد») وجود دارد — یکی برای هر محصول. <span dir="ltr" style="unicode-bidi:isolate">getByRole</span> اینجا
+      خطا می‌دهد چون بیش از یک نتیجه پیدا می‌کند.
+    </p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">۴. چرا تست سوم (افزودن چند محصول مختلف) مهم است؟</span>
+    <p>
+      تست دوم فقط یک محصول را پوشش می‌دهد. تست سوم مطمئن می‌شود که <span dir="ltr" style="unicode-bidi:isolate">state</span> سبد به‌درستی
+      <b>جمع می‌شود</b> (<span dir="ltr" style="unicode-bidi:isolate">accumulate</span>) و اینکه <span dir="ltr" style="unicode-bidi:isolate">toast</span> با کلیک دوم، پیام درستِ
+      محصول جدید را نشان می‌دهد — نه پیامی که از کلیک قبلی باقی مانده باشد.
+    </p>
+  </div>
+
+  <div class="box box-rule">
+    <span class="box-title">چرا این تست به‌طور کلی ارزشمند است</span>
+    <p>
+      برخلاف <span dir="ltr" style="unicode-bidi:isolate">unit test</span> هایی که هرکدام یک کامپوننت را جدا تست می‌کنند، این تست تضمین می‌کند که
+      ارتباط واقعی بین چند کامپوننت (لیست محصول ← store ← نشانگر سبد ← toast) درست کار می‌کند.
+      خیلی از باگ‌های واقعی production دقیقاً در همین اتصال بین قطعات رخ می‌دهند، نه داخل یک کامپوننت تنها.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 22. PROJECT ORGANIZATION ============ -->
+<section class="section-break">
+  <h2 class="section-title">۲۲. سازماندهی پروژه و فایل‌ها</h2>
+
+  <h3 class="sub-title">الگوی رایج: فایل تست کنار فایل اصلی (<span dir="ltr" style="unicode-bidi:isolate">co-location</span>)</h3>
+
+<pre><code>src/
+  components/
+    Button.tsx
+    Button.test.tsx
+    LoginForm.tsx
+    LoginForm.test.tsx
+  hooks/
+    useCounter.ts
+    useCounter.test.ts
+  store/
+    cartSlice.ts
+    cartSlice.test.ts
+  test/
+    setup.ts
+    test-utils.tsx        <span class="cm">// توابع کمکی مشترک</span>
+  mocks/
+    handlers.ts
+    server.ts</code></pre>
+
+  <h3 class="sub-title">فایل <span dir="ltr" style="unicode-bidi:isolate">test-utils.tsx</span> مرکزی (جلوی تکرار کد را می‌گیرد)</h3>
+
+<pre><code><span class="cm">// src/test/test-utils.tsx</span>
+<span class="kw">import</span> { render, RenderOptions } <span class="kw">from</span> <span class="st">'@testing-library/react'</span>
+<span class="kw">import</span> { ReactElement } <span class="kw">from</span> <span class="st">'react'</span>
+<span class="kw">import</span> { Provider } <span class="kw">from</span> <span class="st">'react-redux'</span>
+<span class="kw">import</span> { MemoryRouter } <span class="kw">from</span> <span class="st">'react-router-dom'</span>
+<span class="kw">import</span> { configureStore } <span class="kw">from</span> <span class="st">'@reduxjs/toolkit'</span>
+<span class="kw">import</span> cartReducer <span class="kw">from</span> <span class="st">'../store/cartSlice'</span>
+
+<span class="kw">function</span> <span class="fn">renderWithProviders</span>(
+  ui: ReactElement,
+  { preloadedState = {}, route = <span class="st">'/'</span> }: { preloadedState?: object; route?: string } = {}
+) {
+  <span class="kw">const</span> store = configureStore({ reducer: { cart: cartReducer }, preloadedState })
+
+  <span class="kw">return</span> render(
+    &lt;Provider store={store}&gt;
+      &lt;MemoryRouter initialEntries={[route]}&gt;{ui}&lt;/MemoryRouter&gt;
+    &lt;/Provider&gt;
+  )
+}
+
+<span class="cm">// خروجی‌های testing-library را دوباره export می‌کنیم</span>
+<span class="kw">export *</span> <span class="kw">from</span> <span class="st">'@testing-library/react'</span>
+<span class="kw">export</span> { renderWithProviders <span class="kw">as</span> render }</code></pre>
+
+  <p>حالا در هر تست:</p>
+<pre><code><span class="kw">import</span> { render, screen } <span class="kw">from</span> <span class="st">'../test/test-utils'</span>
+<span class="cm">// دیگر نیازی نیست خودتان Provider/Router را دستی بچینید</span></code></pre>
+
+  <div class="box box-rule">
+    <span class="box-title">قوانین سازماندهی</span>
+    <p>• تست‌ها همیشه کنار فایل اصلی باشند (<span dir="ltr" style="unicode-bidi:isolate">co-location</span>) — راحت‌تر پیدا می‌شوند.</p>
+    <p>• منطق مشترک تست (<span dir="ltr" style="unicode-bidi:isolate">mock server</span>، <span dir="ltr" style="unicode-bidi:isolate">render helper</span>) در یک پوشه <code><span dir="ltr" style="unicode-bidi:isolate">test/</span></code> مرکزی نگه داشته شود.</p>
+    <p>• اسم فایل تست همیشه یکسان باشد: <code><span dir="ltr" style="unicode-bidi:isolate">File.test.tsx</span></code> یا <code><span dir="ltr" style="unicode-bidi:isolate">File.spec.tsx</span></code>.</p>
+  </div>
+
+  <h3 class="sub-title">جمع‌بندی این بخش</h3>
+  <table>
+    <tr><th>موضوع</th><th>ابزار کلیدی</th></tr>
+    <tr><td>Mock حرفه‌ای API</td><td><span dir="ltr" style="unicode-bidi:isolate">msw</span> + <span dir="ltr" style="unicode-bidi:isolate">setupServer</span></td></tr>
+    <tr><td>Mock کردن یک ماژول</td><td><span dir="ltr" style="unicode-bidi:isolate">vi.mock('../path')</span></td></tr>
+    <tr><td>کنترل زمان</td><td><span dir="ltr" style="unicode-bidi:isolate">vi.useFakeTimers(), vi.advanceTimersByTime()</span></td></tr>
+    <tr><td>کم کردن تکرار تست</td><td><span dir="ltr" style="unicode-bidi:isolate">it.each([...])</span></td></tr>
+    <tr><td>تست صفحات با Router</td><td><span dir="ltr" style="unicode-bidi:isolate">MemoryRouter</span></td></tr>
+    <tr><td>تست کامپوننت با state مشترک</td><td><span dir="ltr" style="unicode-bidi:isolate">Provider</span> + <span dir="ltr" style="unicode-bidi:isolate">preloadedState</span> یا <span dir="ltr" style="unicode-bidi:isolate">setState</span> مستقیم</td></tr>
+    <tr><td>تست فلوی کامل</td><td>چند کامپوننت با هم، بدون mock کردن ارتباط بینشان</td></tr>
+    <tr><td>سازماندهی</td><td><span dir="ltr" style="unicode-bidi:isolate">co-location</span> + <span dir="ltr" style="unicode-bidi:isolate">test-utils.tsx</span> مرکزی</td></tr>
+  </table>
+
+  <footer class="page-footer">
+    راهنمای مرجع تست‌نویسی <span dir="ltr" style="unicode-bidi:isolate">React</span> — تهیه شده با <span dir="ltr" style="unicode-bidi:isolate">Claude</span>
+  </footer>
+</section>
+
+</body>
+</html>
